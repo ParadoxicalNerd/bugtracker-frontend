@@ -1,38 +1,38 @@
 {
-    "ticketTypes": {
+    "TicketTypes": {
         "BUG": "BUG",
         "FEATURE": "FEATURE",
         "DOCS": "DOCS"
     },
-    "ticketStatus": {
+    "TicketStatus": {
         "OPEN": "OPEN",
         "ASSIGNED": "ASSIGNED",
         "TESTING": "TESTING",
         "RESOLVED": "RESOLVED"
     },
-    "ticketPriority": {
+    "TicketPriority": {
         "UNKNOWN": "UNKNOWN",
         "LOW": "LOW",
         "MEDIUM": "MEDIUM",
         "HIGH": "HIGH",
         "CRITICAL": "CRITICAL"
     },
-    "User": {
-        "name": "string",
-        "ofType": "userTypes",
-        "tickets": "Ticket"
-    },
-    "userTypes": {
+    "UserTypes": {
         "FILTER": "FILTER",
         "PROGRAMMER": "PROGRAMMER",
         "TESTER": "TESTER"
     },
+    "User": {
+        "name": "string",
+        "ofType": "UserTypes",
+        "tickets": "Ticket"
+    },
     "Ticket": {
         "title": "string",
         "description": "string",
-        "ofType": "ticketTypes",
-        "status": "ticketStatus",
-        "priority": "ticketPriority",
+        "ofType": "TicketTypes",
+        "status": "TicketStatus",
+        "priority": "TicketPriority",
         "project": "Project",
         "createdBy": "User[]",
         "assignedTo": "User[]",
