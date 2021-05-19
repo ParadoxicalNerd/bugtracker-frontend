@@ -1,13 +1,26 @@
 {
-    "Post": {
-        "title": "string",
-        "views": "int",
-        "published": "boolean",
-        "createdAt": "date",
-        "comments": "Comment[]"
+    "User": {
+        "name": "string",
+        "ofType": "userTypes",
+        "tickets": "Ticket"
     },
-    "Comment": {
-        "body": "string",
-        "post": "Post"
+    "Ticket": {
+        "title": "string",
+        "description": "string",
+        "ofType": "ticketTypes",
+        "status": "ticketStatus",
+        "priority": "ticketPriority",
+        "project": "Project",
+        "createdBy": "User[]",
+        "assignedTo": "User[]",
+        "comments": "string[]",
+        "changeLog": "string[]"
+    },
+    "Project": {
+        "name": "string",
+        "description": "string",
+        "createdBy": "User[]",
+        "associatedUsers": "User[]",
+        "tickets": "Ticket[]"
     }
 }
