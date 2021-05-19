@@ -1,8 +1,31 @@
 {
+    "ticketTypes": {
+        "BUG": "BUG",
+        "FEATURE": "FEATURE",
+        "DOCS": "DOCS"
+    },
+    "ticketStatus": {
+        "OPEN": "OPEN",
+        "ASSIGNED": "ASSIGNED",
+        "TESTING": "TESTING",
+        "RESOLVED": "RESOLVED"
+    },
+    "ticketPriority": {
+        "UNKNOWN": "UNKNOWN",
+        "LOW": "LOW",
+        "MEDIUM": "MEDIUM",
+        "HIGH": "HIGH",
+        "CRITICAL": "CRITICAL"
+    },
     "User": {
         "name": "string",
         "ofType": "userTypes",
         "tickets": "Ticket"
+    },
+    "userTypes": {
+        "FILTER": "FILTER",
+        "PROGRAMMER": "PROGRAMMER",
+        "TESTER": "TESTER"
     },
     "Ticket": {
         "title": "string",
