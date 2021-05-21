@@ -1,3 +1,4 @@
+import gql from "graphql-tag";
 import { Project } from "./Project";
 import { User } from "./User";
 
@@ -17,3 +18,11 @@ export interface Ticket {
     comments: string[],
     changeLog: string[]
 }
+
+export const TICKETS_QUERY = gql`
+    {
+        allprojects {
+            name, description
+        }
+    }
+`;

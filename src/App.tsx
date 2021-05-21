@@ -1,7 +1,8 @@
 
 import * as React from 'react';
-import { hot } from "react-hot-loader/root";
-import { Post, Comment, usePostQuery, POSTS_QUERY } from "./Post"
+import { Button } from 'reactstrap'
+
+import ProjectOverview from './controller/ProjectsController'
 
 interface Props {
   name: string
@@ -14,21 +15,25 @@ interface State {
 
 const App = () => {
 
-  const { loading, error, data } = usePostQuery(POSTS_QUERY)
+  // const { loading, error, data } = usePostQuery(POSTS_QUERY)
 
-  console.log(data)
+  // console.log(data)
 
-  if (loading) return <h1>{"Loading..."}</h1>
+  // if (loading) return <h1>{"Loading..."}</h1>
 
-  return (
-    <>
-      {(error || data == undefined) ? (
-        <h1>{"Standby"}</h1>
-      ) : (
-        data && data.posts.map((value: Post) => <h1>{value.title}</h1>)
-      )}
-    </>)
+  // return (
+  //   <>
+  //     <Button color="danger">Danger!</Button>
+
+  //     {(error || data == undefined) ? (
+  //       <h1>{"Standby"}</h1>
+  //     ) : (
+  //       data && data.allprojects.map((value: Post) => <h1>{value.name}</h1>)
+  //     )}
+  //   </>)
+
+  return <ProjectOverview />
 
 }
 
-export default hot(App);
+export default App;

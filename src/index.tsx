@@ -5,8 +5,10 @@ import * as ReactDOM from "react-dom";
 import App from './App';
 import "./styles.scss";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const client = new ApolloClient({
-    uri: `https://mockend.com/ParadoxicalNerd/bugtracker-fronend/graphql`,
+    uri: `http://localhost:9002/graphql`,
     cache: new InMemoryCache()
 })
 

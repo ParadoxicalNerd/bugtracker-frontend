@@ -2,10 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 
 const config = {
-  entry: [
-    'react-hot-loader/patch',
-    './src/index.tsx'
-  ],
+  entry: './src/index.tsx',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js'
@@ -21,7 +18,7 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.scss$/,
+        test: /\.(sass|less|css|scss)$/,
         use: [
           'style-loader',
           'css-loader',
