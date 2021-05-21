@@ -1,7 +1,7 @@
 import * as React from "react"
 import { DocumentNode, gql, useQuery } from "@apollo/client";
 import { Project } from "../models/Project";
-import { Table } from "reactstrap";
+import { Spinner, Table } from "react-bootstrap";
 import { ProjectsView } from "../views/ProjectsView";
 
 const PROJECT_QUERY = gql`
@@ -26,9 +26,9 @@ const ProjectsController = () => {
 
     const { data, error, loading } = useProjectsQuery(PROJECT_QUERY)
 
-    console.log(data)
+    // console.log(data)
 
-    if (loading) return <div>Loading Projects...</div>
+    if (loading) return <Spinner animation="border" variant="primary" />
 
     return (
         <>

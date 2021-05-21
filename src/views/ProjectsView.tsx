@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Input, InputGroup, Table } from 'reactstrap'
+import { Container, FormControl, InputGroup, Table } from 'react-bootstrap'
 import { Project } from '../models/Project'
 
 interface Props {
@@ -14,8 +14,10 @@ const ProjectsView = (props: Props) => {
     }
 
     return (
-        <>
-            <Input placeholder="Filter by project name" onChange={setNewSearch} />
+        <Container className="my-auto">
+            <InputGroup>
+                <FormControl placeholder="Filter by project name" onChange={setNewSearch} />
+            </InputGroup>
             <Table hover={true}>
                 <thead>
                     <tr>
@@ -41,7 +43,7 @@ const ProjectsView = (props: Props) => {
                     }
                 </tbody>
             </Table>
-        </>
+        </Container>
     )
 }
 

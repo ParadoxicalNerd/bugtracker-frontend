@@ -1,8 +1,8 @@
 
 import * as React from 'react';
-import { Button } from 'reactstrap'
 
 import ProjectOverview from './controller/ProjectsController'
+import TicketsController from './controller/TicketsController'
 
 interface Props {
   name: string
@@ -32,7 +32,7 @@ const App = () => {
   //     )}
   //   </>)
 
-  return <ProjectOverview />
+  return <TicketsController />
 
 }
 
