@@ -3,6 +3,7 @@ import { DocumentNode, gql, useQuery } from "@apollo/client";
 import { Project } from "../models/Project";
 import { Spinner, Table } from "react-bootstrap";
 import { ProjectView } from "../views/ProjectView";
+import { useParams } from "react-router-dom";
 
 const PROJECT_QUERY = gql`
 query ProjectQuery($ID:ID){
@@ -34,9 +35,11 @@ const useProjectQuery = (query: DocumentNode, projectID: string) => {
   return { loading, error, data }
 }
 
-const ProjectController = (props: { projectID: string }) => {
+const ProjectController = () => {
 
-  const { data, error, loading } = useProjectQuery(PROJECT_QUERY, props.projectID)
+  const { projectID } = useParams<{ projectID: string }>();
+
+  const { data, error, loading } = useProjectQuery(PROJECT_QUERY, projectID)
 
   // console.log(data)
 

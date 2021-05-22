@@ -14,7 +14,7 @@ const assignedPersonel = (associatedUsers: User[]) => (
         </thead>
         <tbody>
             {associatedUsers.map((val: User) => (
-                <tr>
+                <tr key={val.id}>
                     <th style={{ fontWeight: 400 }}>{val.name}</th>
                     <th style={{ fontWeight: 400 }}>{val.email}</th>
                 </tr>
@@ -37,7 +37,7 @@ const ticketsForProject = (tickets: Ticket[]) => (
         </thead>
         <tbody>
             {tickets.map(ticket => (
-                <tr>
+                <tr key={ticket.id}>
                     <th style={{ fontWeight: 400 }}>{ticket.title}</th>
                     <th style={{ fontWeight: 400 }}>{ticket.createdBy.name}</th>
                     <th style={{ fontWeight: 400 }}>
