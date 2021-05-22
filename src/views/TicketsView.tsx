@@ -50,7 +50,7 @@ export default (props: { tickets: [Ticket] }) => {
             },
             title: {
                 display:true,
-                text: "Tickets Assigned",
+                text: "Tickets By Priority",
                 padding: {
                     top:20
                 },

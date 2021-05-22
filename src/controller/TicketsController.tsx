@@ -6,8 +6,8 @@ import TicketsView from '../views/TicketsView'
 import { User } from '../models/User'
 
 const TICKETS_QUERY = gql`
-    {
-        user(id:2){
+    query TicketsQuery($ID:ID){
+        user(id:$ID){
             tickets {
                 priority
             }
@@ -15,13 +15,13 @@ const TICKETS_QUERY = gql`
     }
 `
 
-const useTicketsQuery = (query: DocumentNode) => {
-    const { loading, error, data } = useQuery<{ user: User }>(query, { variables: { ID: 3 } })
+const useTicketsQuery = (query: DocumentNode, userID: number) => {
+    const { loading, error, data } = useQuery<{ user: User }>(query, { variables: { ID: userID } })
     return { loading, error, data }
 }
 
-const TicketsController = () => {
-    const { data, error, loading } = useTicketsQuery(TICKETS_QUERY)
+const TicketsController = (props: { userID: number }) => {
+    const { data, error, loading } = useTicketsQuery(TICKETS_QUERY, props.userID)
 
     // console.log(data)
 

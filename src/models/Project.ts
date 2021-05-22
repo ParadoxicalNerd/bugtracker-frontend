@@ -4,6 +4,7 @@ import { Ticket } from "./Ticket";
 import { User } from "./User";
 
 export interface Project {
+    id: string,
     name: string,
     description: string,
     createdBy: User,

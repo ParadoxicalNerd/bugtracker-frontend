@@ -7,16 +7,19 @@ export enum ticketStatus { OPEN = 'OPEN', ASSIGNED = 'ASSIGNED', TESTING = 'TEST
 export enum ticketPriority { UNKNOWN = 'UNKNOWN', LOW = 'LOW', MEDIUM = 'MEDIUM', HIGH = 'HIGH', CRITICAL = 'CRITICAL' }
 
 export interface Ticket {
+    id: string,
     title: string,
     description: string,
     ofType: ticketTypes,
     status: ticketStatus,
     priority: ticketPriority,
     project: Project,
-    createdBy: User[],
-    assignedTo: User[],
+    createdBy: User,
+    assignedTo: User,
     comments: string[],
-    changeLog: string[]
+    changeLog: string[],
+    creationDate: Date,
+    modificationDate: Date
 }
 
 export const TICKETS_QUERY = gql`

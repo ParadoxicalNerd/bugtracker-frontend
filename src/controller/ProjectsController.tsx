@@ -4,9 +4,10 @@ import { Project } from "../models/Project";
 import { Spinner, Table } from "react-bootstrap";
 import { ProjectsView } from "../views/ProjectsView";
 
-const PROJECT_QUERY = gql`
+const PROJECTS_QUERY = gql`
     {
         allProjects{
+            id
             name
             description
             createdBy {
@@ -24,7 +25,7 @@ const useProjectsQuery = (query: DocumentNode) => {
 
 const ProjectsController = () => {
 
-    const { data, error, loading } = useProjectsQuery(PROJECT_QUERY)
+    const { data, error, loading } = useProjectsQuery(PROJECTS_QUERY)
 
     // console.log(data)
 
