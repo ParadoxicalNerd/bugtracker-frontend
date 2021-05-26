@@ -9,5 +9,5 @@ export interface User {
     tickets: [Ticket],
     email: string,
     creationDate: Date,
-    modificationDate: Date
+    updateDate: Date
 }

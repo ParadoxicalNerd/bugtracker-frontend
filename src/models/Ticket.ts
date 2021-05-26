@@ -1,6 +1,7 @@
 import gql from "graphql-tag";
 import { Project } from "./Project";
 import { User } from "./User";
+import { Comment } from "./Comment"
 
 export enum ticketTypes { BUG = 'BUG', FEATURE = 'FEATURE', DOCS = 'DOCS' }
 export enum ticketStatus { OPEN = 'OPEN', ASSIGNED = 'ASSIGNED', TESTING = 'TESTING', RESOLVED = 'RESOLVED' }
@@ -16,16 +17,8 @@ export interface Ticket {
     project: Project,
     createdBy: User,
     assignedTo: User,
-    comments: string[],
+    comments: Comment[],
     changeLog: string[],
     creationDate: Date,
-    modificationDate: Date
+    updateDate: Date
 }
-
-export const TICKETS_QUERY = gql`
-    {
-        allprojects {
-            name, description
-        }
-    }
-`;

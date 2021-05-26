@@ -11,5 +11,5 @@ export interface Project {
     associatedUsers: User[],
     tickets: Ticket[],
     creationDate: Date,
-    modificationDate: Date
+    updateDate: Date
 }

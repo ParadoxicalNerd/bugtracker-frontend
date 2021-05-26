@@ -5,7 +5,7 @@ type Project {
   name: String @fake(type:productName)
   description: String @fake(type:productCategory)
   createdBy: User
-  associatedUsers: [User] @listLength(min:0, max:3) 
+  associatedUsers: [User] @listLength(min:1, max:3) 
   tickets: [Ticket]  @listLength(min:3, max:12)
   creationDate: Date @fake(type:pastDate)
   updateDate: Date @fake(type:recentDate)
@@ -21,7 +21,7 @@ type  Ticket {
   project: Project!
   createdBy: User!
   assignedTo: User
-  comments: [String]
+  comments: [Comment] @listLength(min:2, max:4)
   changeLog: [String]
   creationDate: Date @fake(type:pastDate)
   updateDate: Date @fake(type:recentDate)
@@ -35,6 +35,13 @@ type User {
   tickets: [Ticket] @listLength(min:10, max:30)
   creationDate: Date @fake(type:pastDate)
   updateDate: Date @fake(type:recentDate) 
+}
+
+type Comment {
+  id: ID
+  message: String @examples (values:["Add examples", "Some massive issue has been fixed", "Need admin to look into rights"])
+  creationDate: Date @fake(type:recentDate)
+  createdBy: User
 }
 
 type Query {

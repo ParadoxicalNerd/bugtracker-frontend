@@ -1,14 +1,10 @@
 import * as React from 'react'
-import { Container, FormControl, InputGroup, Table } from 'react-bootstrap'
+import { Container, FormControl, InputGroup, Table, Spinner } from 'react-bootstrap'
 import { Redirect, useHistory } from 'react-router'
-import ProjectController from '../controller/ProjectController'
+import useProjectsInfoQuery from '../controller/ProjectsOverviewAccessor'
 import { Project } from '../models/Project'
 
-interface Props {
-    allProjects: [Project];
-}
-
-const ProjectsView = (props: Props) => {
+const projectsOverviewComponent = (allProjects: [Project]) => {
     const [searchQuery, setSearchQuery] = React.useState("")
 
     const setNewSearch = (inputEvent: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,11 +33,11 @@ const ProjectsView = (props: Props) => {
                 </thead>
                 <tbody>
                     {
-                        props.allProjects
+                        allProjects
                             .filter(val => val.description.toLowerCase().includes(searchQuery.toLowerCase())
                                 || val.name.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map(val => (
-                                <tr key={val.id} onClick={() => viewProject(val.id)}>
+                                <tr key={val.id} onClick={() => viewProject(val.id)} style={{ cursor: "pointer" }}>
                                     <th>{val.name}</th>
                                     <th>{val.description}</th>
                                     <th>{val.createdBy.name}</th>
@@ -55,4 +51,19 @@ const ProjectsView = (props: Props) => {
     )
 }
 
-export { ProjectsView }
+export default () => {
+
+    const { data, error, loading } = useProjectsInfoQuery()
+
+    // console.log(data)
+
+    if (loading) return <Spinner animation="border" variant="primary" />
+
+    return (
+        <>
+            {(error || data == undefined) ? <h1>Unexpected Error</h1> :
+                data && projectsOverviewComponent(data.allProjects)
+            }
+        </>
+    )
+}
