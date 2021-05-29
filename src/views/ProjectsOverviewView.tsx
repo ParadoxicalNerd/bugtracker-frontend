@@ -4,14 +4,25 @@ import { Redirect, useHistory } from 'react-router'
 import useProjectsInfoQuery from '../controller/ProjectsOverviewAccessor'
 import { Project } from '../models/Project'
 
-const projectsOverviewComponent = (allProjects: [Project]) => {
+const ProjectsOverviewView = () => {
+
+    // All react hooks
+
+    const { data, error, fetching } = useProjectsInfoQuery()
+
     const [searchQuery, setSearchQuery] = React.useState("")
+
+    const history = useHistory();
+
+    // Custom rendering
+
+    if (fetching) return <Spinner animation="border" variant="primary" />
+
+    if (error || data == undefined) return <h1>Unexpected Error</h1>
 
     const setNewSearch = (inputEvent: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(inputEvent.target.value || "")
     }
-
-    const history = useHistory();
 
     const viewProject = (projectID: string) => {
         history.push(`projects/${projectID}`)
@@ -33,7 +44,7 @@ const projectsOverviewComponent = (allProjects: [Project]) => {
                 </thead>
                 <tbody>
                     {
-                        allProjects
+                        data.allProjects
                             .filter(val => val.description.toLowerCase().includes(searchQuery.toLowerCase())
                                 || val.name.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map(val => (
@@ -51,19 +62,4 @@ const projectsOverviewComponent = (allProjects: [Project]) => {
     )
 }
 
-export default () => {
-
-    const { data, error, loading } = useProjectsInfoQuery()
-
-    // console.log(data)
-
-    if (loading) return <Spinner animation="border" variant="primary" />
-
-    return (
-        <>
-            {(error || data == undefined) ? <h1>Unexpected Error</h1> :
-                data && projectsOverviewComponent(data.allProjects)
-            }
-        </>
-    )
-}
+export default ProjectsOverviewView

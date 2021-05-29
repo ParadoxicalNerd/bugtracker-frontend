@@ -49,4 +49,5 @@ type Query {
   ticket(id:ID): Ticket
   user(id:ID): User
   allProjects:[Project!]
+  allUsers:[User!]
 }

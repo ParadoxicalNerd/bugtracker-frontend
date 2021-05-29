@@ -1,8 +1,8 @@
 import * as React from "react"
-import { DocumentNode, gql, useQuery } from "@apollo/client";
+import { useQuery } from "urql";
 import { Project } from "../models/Project";
 
-const PROJECTS_QUERY = gql`
+const PROJECTS_QUERY = `
     {
         allProjects{
             id
@@ -17,8 +17,8 @@ const PROJECTS_QUERY = gql`
 `
 
 const useProjectsInfoQuery = () => {
-    const { loading, error, data } = useQuery<{ allProjects: [Project] }>(PROJECTS_QUERY)
-    return { loading, error, data }
+    const [result, reexecuteQuery] = useQuery<{ allProjects: [Project] }>({ query: PROJECTS_QUERY })
+    return { ...result }
 }
 
 export default useProjectsInfoQuery

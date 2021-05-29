@@ -7,7 +7,7 @@ import { User } from '../models/User'
 import { useParams } from "react-router-dom";
 import useProjectInfoAccessor from '../controller/ProjectInfoAccessor'
 
-const assignedPersonel = (associatedUsers: User[]) => (
+const AssignedPersonel: React.FC<{ associatedUsers: User[] }> = ({ associatedUsers }) => (
     <Table striped hover responsive>
         <thead>
             <tr>
@@ -16,24 +16,22 @@ const assignedPersonel = (associatedUsers: User[]) => (
             </tr>
         </thead>
         <tbody>
-            {associatedUsers.map((val: User) => (
-                <tr key={val.id}>
-                    <th style={{ fontWeight: 400 }}>{val.name}</th>
-                    <th style={{ fontWeight: 400 }}>{val.email}</th>
+            {associatedUsers.map((user: User) => (
+                <tr key={user.id}>
+                    <th style={{ fontWeight: 400 }}>{user.name}</th>
+                    <th style={{ fontWeight: 400 }}>{user.email}</th>
                 </tr>
             ))}
         </tbody>
     </Table>
 )
 
-const ticketsForProject = (tickets: Ticket[]) => {
+const TicketsForProject: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
     const history = useHistory();
 
     const viewTicket = (ticketID: string) => {
         history.push(`/ticket/${ticketID}`)
     }
-
-    console.log(tickets.map(ticket => ticket.id))
 
     return (
         <Table striped hover responsive>
@@ -90,14 +88,14 @@ const ProjectInfoView = (project: Project) => (
                 <Card.Body>
                     <Card.Title>{"Assigned Personel"}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{"Current Users on this project"}</Card.Subtitle>
-                    {assignedPersonel(project.associatedUsers)}
+                    <AssignedPersonel associatedUsers={project.associatedUsers} />
                 </Card.Body>
             </Card>
             <Card>
                 <Card.Body>
                     <Card.Title>{"Tickets for project"}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">{"Summerized tickets for the project"}</Card.Subtitle>
-                    {ticketsForProject(project.tickets)}
+                    <TicketsForProject tickets={project.tickets} />
                 </Card.Body>
             </Card>
         </CardGroup>
@@ -108,11 +106,11 @@ export default () => {
 
     const { projectID } = useParams<{ projectID: string }>();
 
-    const { data, error, loading } = useProjectInfoAccessor(projectID)
+    const { data, error, fetching } = useProjectInfoAccessor(projectID)
 
     // console.log(data)
 
-    if (loading) return <Spinner animation="border" variant="primary" />
+    if (fetching) return <Spinner animation="border" variant="primary" />
 
     return (
         <>

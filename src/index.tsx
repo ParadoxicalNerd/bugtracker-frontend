@@ -1,4 +1,4 @@
-import { ApolloClient, ApolloProvider, InMemoryCache, NormalizedCacheObject } from '@apollo/client';
+import { createClient, Provider } from 'urql';
 import * as React from 'react';
 import * as ReactDOM from "react-dom";
 
@@ -7,16 +7,15 @@ import "./styles.scss";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const client = new ApolloClient({
-    uri: `http://localhost:9002/graphql`,
-    cache: new InMemoryCache()
+const client = createClient({
+    url: `http://localhost:9002/graphql`
 })
 
 let mountNode = document.getElementById("app");
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
+    <Provider value={client}>
         <App />
-    </ApolloProvider>,
+    </Provider>,
     mountNode
 );

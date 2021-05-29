@@ -9,7 +9,7 @@ export default () => (
         <Switch>
             <Route exact path='/'>
                 {/* TODO: Change this to actual landing page */}
-                <Redirect from='/' to="/ticket/2" />
+                <Redirect from='/' to="/projects" />
             </Route>
 
             <Route exact path="/projects">

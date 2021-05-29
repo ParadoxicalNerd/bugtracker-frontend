@@ -1,5 +1,3 @@
-import { DocumentNode, gql, useQuery } from '@apollo/client'
-
 import { Ticket } from "./Ticket";
 import { User } from "./User";
 

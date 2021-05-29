@@ -89,11 +89,11 @@ const userStatsView = (tickets: [Ticket]) => {
 }
 
 export default (props: { userID: number }) => {
-    const { data, error, loading } = userStatsAccerssor(props.userID)
+    const { data, error, fetching } = userStatsAccerssor(props.userID)
 
     // console.log(data)
 
-    if (loading) return <Spinner animation="border" variant="primary" />
+    if (fetching) return <Spinner animation="border" variant="primary" />
 
     return (
         <>

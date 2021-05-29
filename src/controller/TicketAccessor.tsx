@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { DocumentNode, gql, useQuery } from '@apollo/client'
+import { useQuery } from 'urql'
 import { Ticket } from '../models/Ticket'
 
 
-const TICKET_QUERY = gql`
+const TICKET_QUERY = `
 query TicketQuery ($ID:ID) {
     ticket(id:$ID) {
       id
@@ -37,8 +37,8 @@ query TicketQuery ($ID:ID) {
 `
 
 const ticketAccessor = (ticketID: string) => {
-  const { loading, error, data } = useQuery<{ ticket: Ticket }>(TICKET_QUERY, { variables: { ID: ticketID } })
-  return { loading, error, data }
+  const [result, reexecuteQuery] = useQuery<{ ticket: Ticket }>({ query: TICKET_QUERY, variables: { ID: ticketID } })
+  return { ...result }
 }
 
 

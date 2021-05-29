@@ -1,4 +1,3 @@
-import gql from "graphql-tag";
 import { Project } from "./Project";
 import { User } from "./User";
 import { Comment } from "./Comment"
@@ -6,6 +5,10 @@ import { Comment } from "./Comment"
 export enum ticketTypes { BUG = 'BUG', FEATURE = 'FEATURE', DOCS = 'DOCS' }
 export enum ticketStatus { OPEN = 'OPEN', ASSIGNED = 'ASSIGNED', TESTING = 'TESTING', RESOLVED = 'RESOLVED' }
 export enum ticketPriority { UNKNOWN = 'UNKNOWN', LOW = 'LOW', MEDIUM = 'MEDIUM', HIGH = 'HIGH', CRITICAL = 'CRITICAL' }
+
+export const ticketPriorityArray = [ticketPriority.CRITICAL, ticketPriority.LOW, ticketPriority.MEDIUM, ticketPriority.HIGH]
+export const ticketStatusArray = [ticketStatus.ASSIGNED, ticketStatus.OPEN, ticketStatus.RESOLVED, ticketStatus.TESTING]
+export const ticketTypesArray = [ticketTypes.BUG, ticketTypes.DOCS, ticketTypes.FEATURE]
 
 export interface Ticket {
     id: string,
