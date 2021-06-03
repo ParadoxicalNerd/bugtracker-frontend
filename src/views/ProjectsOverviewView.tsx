@@ -33,7 +33,7 @@ const ProjectsOverviewView = () => {
             <InputGroup>
                 <FormControl placeholder="Filter by project name" onChange={setNewSearch} />
             </InputGroup>
-            <Table hover={true}>
+            <Table striped hover responsive>
                 <thead>
                     <tr>
                         <th>{"Project Name"}</th>
@@ -49,16 +49,16 @@ const ProjectsOverviewView = () => {
                                 || val.name.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map(val => (
                                 <tr key={val.id} onClick={() => viewProject(val.id)} style={{ cursor: "pointer" }}>
-                                    <th>{val.name}</th>
-                                    <th>{val.description}</th>
-                                    <th>{val.createdBy.name}</th>
-                                    <th>{val.creationDate}</th>
+                                    <td>{val.name}</td>
+                                    <td>{val.description}</td>
+                                    <td>{val.createdBy.name}</td>
+                                    <td>{val.creationDate}</td>
                                 </tr>
                             ))
                     }
                 </tbody>
-            </Table>
-        </Container>
+            </Table >
+        </Container >
     )
 }
 

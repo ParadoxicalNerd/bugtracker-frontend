@@ -34,7 +34,7 @@ const useProjectInfoAccessor = (projectID: string) => {
   // return { fetching, error, data }
   const [result, reexecuteQuery] = useQuery<{ project: Project }>({ query: PROJECT_QUERY, variables: { ID: projectID } })
   // const { data, fetching, error } : { project: Project, any, any } = result;
-  return { ...result }
+  return result
 
 }
 

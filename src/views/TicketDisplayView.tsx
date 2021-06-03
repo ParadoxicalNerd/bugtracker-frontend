@@ -117,7 +117,7 @@ const ticketComments = (ticket: Ticket) => (
         <Card.Body>
             <Card.Title><h3>Ticket Comments</h3></Card.Title>
             <Card.Subtitle className="mb-2 text-muted">All comments for this ticket</Card.Subtitle>
-            <Table responsive>
+            <Table striped hover responsive>
                 <thead>
                     <tr>
                         <td>Commenter</td>
@@ -145,8 +145,8 @@ const ticketComments = (ticket: Ticket) => (
                     {/* TODO: Implement actual functionality */}
                 </InputGroup.Append>
             </InputGroup>
-        </Card.Body>
-    </Card>
+        </Card.Body >
+    </Card >
 )
 
 export default ({ ticket }: { ticket: Ticket }) => (

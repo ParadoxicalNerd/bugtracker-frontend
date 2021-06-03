@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Row } from "react-bootstrap"
 import { Card, Form, Col, Container, Button } from "react-bootstrap"
-import { useRouteMatch } from "react-router"
+import { Redirect, useHistory, useLocation, useRouteMatch } from "react-router"
 import { Link } from "react-router-dom"
 import { Ticket, ticketPriorityArray, ticketStatusArray, ticketTypesArray } from "../models/Ticket"
 import { User } from "../models/User"
@@ -9,21 +9,27 @@ import { User } from "../models/User"
 const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }) => {
 
     let { url } = useRouteMatch()
+    const history = useHistory()
+
+    const formSubmit = () => {
+        history.push(url)
+        {/* TODO: Implement actual functionality */ }
+    }
 
     return (
         <Container>
             <Card>
                 <Card.Body>
-                    <Row>
-                        <Col>
-                            <Card.Title><h3>Edit Ticket</h3></Card.Title>
-                            <Card.Subtitle>Change Ticket Properties</Card.Subtitle>
-                        </Col>
-                        <Col md="auto"><Button size="sm"><Link to={url}>Save</Link></Button></Col>
-                        {/* TODO: Implement actual functionality */}
-                    </Row>
-                    <Container className="my-4">
-                        <Form>
+                    <Form onSubmit={formSubmit}>
+                        <Row>
+                            <Col>
+                                <Card.Title><h3>Edit Ticket</h3></Card.Title>
+                                <Card.Subtitle>Change Ticket Properties</Card.Subtitle>
+                            </Col>
+                            <Col md="auto"><Button size="sm" type="submit">Submit{/*<Link to={url}>Save</Link>*/}</Button></Col>
+                        </Row>
+                        <Container className="my-4">
+
                             <Row>
                                 <Col>
                                     <Form.Group controlId="ticketEdit.title">
@@ -84,8 +90,9 @@ const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }
                                     </Form.Group>
                                 </Col>
                             </Row>
-                        </Form>
-                    </Container>
+
+                        </Container>
+                    </Form>
                 </Card.Body>
             </Card>
         </Container>

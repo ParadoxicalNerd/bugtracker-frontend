@@ -18,12 +18,12 @@ const AssignedPersonel: React.FC<{ associatedUsers: User[] }> = ({ associatedUse
         <tbody>
             {associatedUsers.map((user: User) => (
                 <tr key={user.id}>
-                    <th style={{ fontWeight: 400 }}>{user.name}</th>
-                    <th style={{ fontWeight: 400 }}>{user.email}</th>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
                 </tr>
             ))}
         </tbody>
-    </Table>
+    </Table >
 )
 
 const TicketsForProject: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
@@ -47,17 +47,17 @@ const TicketsForProject: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
             <tbody>
                 {tickets.map(ticket => (
                     <tr key={ticket.id} onClick={() => viewTicket(ticket.id)} style={{ cursor: "pointer" }}>
-                        <th style={{ fontWeight: 400 }}>{ticket.title}</th>
-                        <th style={{ fontWeight: 400 }}>{ticket.createdBy.name}</th>
-                        <th style={{ fontWeight: 400 }}>
+                        <td>{ticket.title}</td>
+                        <td>{ticket.createdBy.name}</td>
+                        <td>
                             {ticket.assignedTo.name}
-                        </th>
-                        <th style={{ fontWeight: 400 }}>{ticket.status}</th>
-                        <th style={{ fontWeight: 400 }}>{ticket.creationDate}</th>
+                        </td>
+                        <td>{ticket.status}</td>
+                        <td>{ticket.creationDate}</td>
                     </tr>
                 ))}
             </tbody>
-        </Table>
+        </Table >
     )
 }
 

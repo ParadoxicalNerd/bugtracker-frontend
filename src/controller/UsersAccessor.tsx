@@ -3,13 +3,18 @@ import { User } from "../models/User";
 
 const UsernameQuery = `
 query usenames {
-    allUsers{
-      name
-    }
+  allUsers{
+    id
+    name
+    email
+    ofType
   }
+}
   `
 
-export default () => {
+const useUsernameAccessor = () => {
   const [result, reexecuteQuery] = useQuery<{ allUsers: User[] }>({ query: UsernameQuery })
   return { ...result }
 }
+
+export default useUsernameAccessor

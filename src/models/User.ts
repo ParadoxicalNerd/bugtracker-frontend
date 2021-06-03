@@ -1,6 +1,8 @@
 import { Ticket } from "./Ticket";
 
-export enum userTypes { FILTER, PROGRAMMER, TESTER }
+export enum userTypes { ADMIN = "ADMIN", DEVELOPER = "DEVELOPER", PROGRAMMER = "PROGRAMMER", TESTER = "TESTER" }
+
+export const userTypesArray = ["ADMIN", "DEVELOPER", "PROGRAMMER", "TESTER"]
 
 export interface User {
     id: string,

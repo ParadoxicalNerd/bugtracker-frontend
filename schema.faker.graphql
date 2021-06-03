@@ -31,7 +31,7 @@ type User {
   id:ID
   name: String @fake(type:fullName)
   email: String @fake(type:email)
-  ofType: String @examples(values:["FILTER", "PROGRAMMER", "TESTER"])
+  ofType: String @examples(values:["ADMIN", "PROJECT_MANAGER", "PROGRAMMER", "TESTER"])
   tickets: [Ticket] @listLength(min:10, max:30)
   creationDate: Date @fake(type:pastDate)
   updateDate: Date @fake(type:recentDate) 
@@ -49,5 +49,5 @@ type Query {
   ticket(id:ID): Ticket
   user(id:ID): User
   allProjects:[Project!]
-  allUsers:[User!]
+  allUsers:[User!] @listLength(min:3, max:10)
 }

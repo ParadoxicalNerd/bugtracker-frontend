@@ -4,6 +4,7 @@ import { Component, useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import { Ticket, ticketPriority } from '../models/Ticket';
 import userStatsAccerssor from '../controller/UserStatsAccessor';
+import UserContext from '../context/UserContext';
 // Cannot use treeshaking for Chart. Gotta import everything. Read this:
 // https://www.chartjs.org/docs/latest/getting-started/integration.html#bundlers-webpack-rollup-etc
 
@@ -26,7 +27,7 @@ let TICKET_INFO = {
     }
 }
 
-const userStatsView = (tickets: [Ticket]) => {
+const UserStatsView = ({ tickets }: { tickets: [Ticket] }) => {
     let canvasRef = useRef<HTMLCanvasElement | null>(null)
 
     tickets.forEach((val) => {
@@ -88,8 +89,11 @@ const userStatsView = (tickets: [Ticket]) => {
     )
 }
 
-export default (props: { userID: number }) => {
-    const { data, error, fetching } = userStatsAccerssor(props.userID)
+export default () => {
+
+    const userID = React.useContext(UserContext)
+
+    const { data, error, fetching } = userStatsAccerssor(userID)
 
     // console.log(data)
 
@@ -98,7 +102,7 @@ export default (props: { userID: number }) => {
     return (
         <>
             {(error || data == undefined) ? <h1>Unexpected Error</h1> :
-                data && userStatsView(data.user.tickets)
+                data && <UserStatsView tickets={data.user.tickets} />
             }
         </>
     )

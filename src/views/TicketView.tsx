@@ -5,7 +5,7 @@ import { Ticket, ticketPriority, ticketPriorityArray, ticketStatusArray, ticketT
 import { useHistory, useLocation, useParams, useRouteMatch, Switch, Route } from 'react-router'
 import { Spinner } from 'react-bootstrap'
 import ticketAccessor from '../controller/TicketAccessor';
-import usernamesAccessor from '../controller/UsernamesAccessor';
+import usernamesAccessor from '../controller/UsersAccessor';
 import { User } from '../models/User';
 import TicketEditorView from './TicketEditorView'
 import TicketDisplayView from './TicketDisplayView';
