@@ -8,6 +8,8 @@ const TICKETS_QUERY = `
         user(id:$ID){
             tickets {
                 priority
+                ofType
+                status
             }
         }
     }

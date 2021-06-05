@@ -8,8 +8,10 @@ import TicketView from "../views/TicketView";
 import UserStatsView from "../views/UserStatsView";
 
 import Helmet from 'react-helmet'
+import HomeView from "../views/HomeView";
 
 const userID = 2
+const userName = "Pankaj"
 
 export default () => (
     <HashRouter>
@@ -19,12 +21,9 @@ export default () => (
                     <Helmet>
                         <title>Home</title>
                     </Helmet>
-                    {/* TODO: Change this to actual landing page */}
-                    <div><Link to="/projects">projects</Link></div>
-
-                    <div><Link to="/user/stats">user/stats</Link></div>
-
-                    <div><Link to="/userroles">userroles</Link></div>
+                    <UserContext.Provider value={{ userID: userID, username: userName }}>
+                        <HomeView />
+                    </UserContext.Provider>
                 </>
             </Route>
 
@@ -51,11 +50,12 @@ export default () => (
                 <TicketView />
             </Route>
 
-            <Route path="/user/stats">
+            <Route path="/userstats">
                 <Helmet>
                     <title>User stats</title>
                 </Helmet>
-                <UserContext.Provider value={userID}>
+
+                <UserContext.Provider value={{ userID: userID, username: userName }}>
                     <UserStatsView />
                 </UserContext.Provider>
             </Route>

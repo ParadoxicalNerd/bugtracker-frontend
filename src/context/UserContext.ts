@@ -1,4 +1,4 @@
 import { createContext } from 'react'
 
-const UserContext = createContext(0)
+const UserContext = createContext({ userID: 0, username: "" })
 export default UserContext

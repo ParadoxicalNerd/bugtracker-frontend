@@ -59,73 +59,73 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
     }
 
     return (
-        <Container>
-            <Card>
-                <Card.Body>
-                    <Card.Title>Manage User Roles</Card.Title>
-                    <CardGroup>
-                        <Card>
-                            <Form onSubmit={onSubmit}>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Subtitle>Select 1 or more users</Card.Subtitle>
-                                        <Form.Control as="select" multiple className="my-2" onChange={onChange} name="selectUsers">
-                                            {users.map(user => (
-                                                <option value={user.id} key={user.id}>
-                                                    {user.name}
-                                                </option>
-                                            ))}
-                                        </Form.Control>
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Card.Body>
-                                        <Card.Subtitle>Select a role</Card.Subtitle>
-                                        <Form.Control as="select" className="my-2" onChange={onChange} name="selectRole">
-                                            {userTypesArray.map(role => (
-                                                <option value={role} key={role}>
-                                                    {role}
-                                                </option>
-                                            ))}
-                                        </Form.Control>
-                                    </Card.Body>
-                                </Card>
-                                <Card>
-                                    <Button type='submit'>Submit</Button>
-                                </Card>
-                            </Form>
-                        </Card>
-                        <Card>
-                            <Card.Title>Your personel</Card.Title>
-                            <Card.Subtitle>All the users in your database</Card.Subtitle>
-                            <Card.Body>
-                                <Table striped hover responsive>
-                                    <thead>
-                                        <tr>
-                                            <th>Username</th>
-                                            <th>Email</th>
-                                            <th>Role</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            users.map((user) => (
-                                                <tr key={user.id}>
-                                                    <td>{user.name}</td>
-                                                    <td>{user.email}</td>
-                                                    <td>{user.ofType}</td>
-                                                </tr>
-                                            ))
-                                        }
-                                    </tbody>
-                                </Table>
-                            </Card.Body>
-                        </Card>
-                    </CardGroup>
-                    {/* <CardColumns><Card>Hi</Card></CardColumns> */}
-                </Card.Body>
-            </Card >
-        </Container >
+
+        <Card>
+            <Card.Body>
+                <Card.Title>Manage User Roles</Card.Title>
+                <CardGroup>
+                    <Card>
+                        <Form onSubmit={onSubmit}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Subtitle>Select 1 or more users</Card.Subtitle>
+                                    <Form.Control as="select" multiple className="my-2" onChange={onChange} name="selectUsers">
+                                        {users.map(user => (
+                                            <option value={user.id} key={user.id}>
+                                                {user.name}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Card.Body>
+                            </Card>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Subtitle>Select a role</Card.Subtitle>
+                                    <Form.Control as="select" className="my-2" onChange={onChange} name="selectRole">
+                                        {userTypesArray.map(role => (
+                                            <option value={role} key={role}>
+                                                {role}
+                                            </option>
+                                        ))}
+                                    </Form.Control>
+                                </Card.Body>
+                            </Card>
+                            <Card>
+                                <Button type='submit'>Submit</Button>
+                            </Card>
+                        </Form>
+                    </Card>
+                    <Card>
+                        <Card.Title>Your personel</Card.Title>
+                        <Card.Subtitle>All the users in your database</Card.Subtitle>
+                        <Card.Body>
+                            <Table striped hover responsive>
+                                <thead>
+                                    <tr>
+                                        <th>Username</th>
+                                        <th>Email</th>
+                                        <th>Role</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        users.map((user) => (
+                                            <tr key={user.id}>
+                                                <td>{user.name}</td>
+                                                <td>{user.email}</td>
+                                                <td>{user.ofType}</td>
+                                            </tr>
+                                        ))
+                                    }
+                                </tbody>
+                            </Table>
+                        </Card.Body>
+                    </Card>
+                </CardGroup>
+                {/* <CardColumns><Card>Hi</Card></CardColumns> */}
+            </Card.Body>
+        </Card >
+
     )
 }
 

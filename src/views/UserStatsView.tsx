@@ -1,37 +1,38 @@
 import * as React from 'react';
-import { Spinner } from 'react-bootstrap'
+import { Card, CardGroup, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Component, useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-import { Ticket, ticketPriority } from '../models/Ticket';
+import { Ticket, ticketPriority, ticketStatus, ticketTypes, ticketTypesArray } from '../models/Ticket';
 import userStatsAccerssor from '../controller/UserStatsAccessor';
 import UserContext from '../context/UserContext';
 // Cannot use treeshaking for Chart. Gotta import everything. Read this:
 // https://www.chartjs.org/docs/latest/getting-started/integration.html#bundlers-webpack-rollup-etc
 
-let TICKET_INFO = {
-    "UNKNOWN": {
-        value: 0,
-        color: 'rgb(201, 203, 207)'
-    }, "LOW": {
-        value: 0,
-        color: 'rgb(75, 192, 192)'
-    }, "MEDIUM": {
-        value: 0,
-        color: 'rgb(54, 162, 235)'
-    }, "HIGH": {
-        value: 0,
-        color: 'rgb(255, 205, 86)'
-    }, "CRITICAL": {
-        value: 0,
-        color: 'rgb(255, 99, 132)'
-    }
-}
+const TicketPriorityView = ({ tickets }: { tickets: [Ticket] }) => {
 
-const UserStatsView = ({ tickets }: { tickets: [Ticket] }) => {
+    let TICKET_INFO = {
+        "UNKNOWN": {
+            value: 0,
+            color: 'rgb(201, 203, 207)'
+        }, "LOW": {
+            value: 0,
+            color: 'rgb(75, 192, 192)'
+        }, "MEDIUM": {
+            value: 0,
+            color: 'rgb(54, 162, 235)'
+        }, "HIGH": {
+            value: 0,
+            color: 'rgb(255, 205, 86)'
+        }, "CRITICAL": {
+            value: 0,
+            color: 'rgb(255, 99, 132)'
+        }
+    }
+
     let canvasRef = useRef<HTMLCanvasElement | null>(null)
 
     tickets.forEach((val) => {
-        TICKET_INFO[ticketPriority[val.priority]].value++
+        if (val.status != ticketStatus.RESOLVED) TICKET_INFO[ticketPriority[val.priority]].value++
     })
 
     const data = {
@@ -51,47 +52,160 @@ const UserStatsView = ({ tickets }: { tickets: [Ticket] }) => {
             legend: {
                 position: 'right'
             },
-            title: {
-                display: true,
-                text: "Tickets By Priority",
-                padding: {
-                    top: 20
-                },
-                font: {
-                    size: 30
-                }
-            }
+            // title: {
+            //     display: true,
+            //     text: "Tickets By Priority",
+            //     padding: {
+            //         top: 20
+            //     },
+            //     font: {
+            //         size: 30
+            //     }
+            // }
         }
     }
 
     useEffect(() => {
+        let chart: any;
         if (canvasRef.current) {
             let canvasChart = canvasRef.current.getContext("2d")
 
             // Chart.defaults.global.legend.display = false;
 
             if (canvasChart) {
-                new Chart(canvasChart, {
+                chart = new Chart(canvasChart, {
                     type: "doughnut",
                     data: data,
                     options: options
                 })
             }
         }
+
+        return () => {
+            // Cleanup function
+            chart.destroy();
+        }
     })
 
     return (
-        <div style={{ width: "500px" }}> {
-            // TODO: Make responsive
+        <Card>
+            <Card.Body>
+                <Card.Title><h3>Tickets by priority</h3></Card.Title>
+                <Container >
+                    <div style={{ width: "75%", margin: "0 auto" }}>
+                        {/* Centering everything */}
+                        <canvas ref={canvasRef} />
+                    </div>
+                </Container>
+            </Card.Body>
+        </Card>
+    )
+}
+
+const TicketTypeView = ({ tickets }: { tickets: [Ticket] }) => {
+
+    let TICKET_INFO = {
+        "BUG": {
+            value: 0,
+            color: 'rgb(201, 203, 207)'
+        }, "FEATURE": {
+            value: 0,
+            color: 'rgb(75, 192, 192)'
+        }, "DOCS": {
+            value: 0,
+            color: 'rgb(54, 162, 235)'
         }
-            <canvas ref={canvasRef} style={{ border: "1px black solid" }} />
-        </div>
+    }
+
+    let canvasRef = useRef<HTMLCanvasElement | null>(null)
+
+    tickets.forEach((val) => {
+        if (val.status != ticketStatus.RESOLVED) TICKET_INFO[ticketTypes[val.ofType]].value++
+        // Ensures we only count open tickets
+    })
+
+    const data = {
+        labels: Object.keys(TICKET_INFO),
+        datasets: [{
+            label: 'Assigned Bugs',
+            data: Object.values(TICKET_INFO).map(ele => ele.value),
+            backgroundColor: Object.values(TICKET_INFO).map(ele => ele.color),
+        }]
+    };
+
+    const options = {
+        // animation: {
+        //     duration: 0
+        // },
+        plugins: {
+            legend: {
+                // position: 'right'
+                display: false
+            },
+            // title: {
+            //     display: true,
+            //     text: "Tickets By Types",
+            //     padding: {
+            //         top: 20
+            //     },
+            //     font: {
+            //         size: 30
+            //     }
+            // }
+        },
+        scales: {
+            y: {
+                beginAtZero: true
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        let chart: any;
+        if (canvasRef.current) {
+            let canvasChart = canvasRef.current.getContext("2d")
+
+            // Chart.defaults.global.legend.display = false;
+
+            if (canvasChart) {
+                chart = new Chart(canvasChart, {
+                    type: "bar",
+                    data: data,
+                    options: options
+                })
+            }
+        }
+        return () => {
+            // Cleanup function
+            chart.destroy();
+        }
+    })
+
+    return (
+        <Card>
+            <Card.Body style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between"
+            }}>
+                <Card.Title><h3>Tickets by types</h3></Card.Title>
+                <Container >
+                    <canvas ref={canvasRef} />
+                </Container>
+                <div>{/* Blank container to center everything */}</div>
+            </Card.Body>
+        </Card >
     )
 }
 
 export default () => {
 
-    const userID = React.useContext(UserContext)
+    const { userID } = React.useContext(UserContext)
 
     const { data, error, fetching } = userStatsAccerssor(userID)
 
@@ -99,11 +213,14 @@ export default () => {
 
     if (fetching) return <Spinner animation="border" variant="primary" />
 
+    if (error || data == undefined) return <h1>Unexpected Error</h1>
+
     return (
-        <>
-            {(error || data == undefined) ? <h1>Unexpected Error</h1> :
-                data && <UserStatsView tickets={data.user.tickets} />
-            }
-        </>
+
+        <CardGroup>
+            <TicketPriorityView tickets={data.user.tickets} />
+            <TicketTypeView tickets={data.user.tickets} />
+        </CardGroup>
+
     )
 }
