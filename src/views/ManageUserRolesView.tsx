@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Card, CardColumns, Form, Container, Button, Spinner, CardGroup, Table } from 'react-bootstrap'
 import useUsernameAccessor from '../controller/UsersAccessor';
 import UsernamesAccessor from '../controller/UsersAccessor';
-import { User, userTypes, userTypesArray } from '../models/User';
+import { User, UserType } from '../models';
 
 // let a;
 
@@ -27,9 +27,9 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
 
     const [users, setUsers] = React.useState(_users)
 
-    let formValue: { users: string[], role: userTypes } = {
+    let formValue: { users: string[], role: UserType } = {
         users: [],
-        role: userTypes.ADMIN
+        role: UserType.Admin
     }
 
     const onChange = (event: React.FormEvent<HTMLInputElement>) => {
@@ -50,7 +50,7 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
 
         setUsers(users.map((user) => {
             if (formValue.users.includes(user.id)) {
-                user.ofType = formValue.role
+                user.type = formValue.role
             }
             return user
         }))
@@ -82,7 +82,7 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                                 <Card.Body>
                                     <Card.Subtitle>Select a role</Card.Subtitle>
                                     <Form.Control as="select" className="my-2" onChange={onChange} name="selectRole">
-                                        {userTypesArray.map(role => (
+                                        {Object.keys(UserType).map(role => (
                                             <option value={role} key={role}>
                                                 {role}
                                             </option>
@@ -113,7 +113,7 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                                             <tr key={user.id}>
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
-                                                <td>{user.ofType}</td>
+                                                <td>{user.type}</td>
                                             </tr>
                                         ))
                                     }

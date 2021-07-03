@@ -1,5 +1,5 @@
 import { useQuery } from "urql"
-import { User } from "../models/User";
+import { User } from "../models";
 
 const UsernameQuery = `
 query usenames {
@@ -7,7 +7,7 @@ query usenames {
     id
     name
     email
-    ofType
+    type
   }
 }
   `

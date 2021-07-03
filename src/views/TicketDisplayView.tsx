@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Card, InputGroup, Row, Col, Container, Button, Table, FormControl, CardGroup } from "react-bootstrap"
 import { Link, useRouteMatch } from "react-router-dom"
-import { Ticket } from "../models/Ticket"
+import { Ticket } from "../models";
 
 const ticketDetails = (ticket: Ticket) => {
     let { url } = useRouteMatch()
@@ -40,7 +40,7 @@ const ticketDetails = (ticket: Ticket) => {
                         <Card border="light">
                             <Card.Body>
                                 <Card.Title>Assigned Developer</Card.Title>
-                                <Card.Text>{ticket.assignedTo.name}</Card.Text>
+                                <Card.Text>{ticket.assignedTo?.name}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -48,7 +48,7 @@ const ticketDetails = (ticket: Ticket) => {
                         <Card border="light">
                             <Card.Body>
                                 <Card.Title>Submitter</Card.Title>
-                                <Card.Text>{ticket.createdBy.name}</Card.Text>
+                                <Card.Text>{ticket.author.name}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -84,7 +84,7 @@ const ticketDetails = (ticket: Ticket) => {
                         <Card border="light">
                             <Card.Body>
                                 <Card.Title>Ticket Type</Card.Title>
-                                <Card.Text>{ticket.ofType}</Card.Text>
+                                <Card.Text>{ticket.type}</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -126,13 +126,13 @@ const ticketComments = (ticket: Ticket) => (
                     </tr>
                 </thead>
                 <tbody>
-                    {ticket.comments.map((comment) => (
-                        <tr key={comment.id}>
-                            <td>{comment.createdBy.name}</td>
+                    {ticket.comments ? ticket.comments.map((comment) => (
+                        comment ? <tr key={comment.id}>
+                            <td>{comment.author.name}</td>
                             <td>{comment.message}</td>
                             <td>{comment.creationDate}</td>
-                        </tr>
-                    ))}
+                        </tr> : null
+                    )) : null}
                 </tbody>
             </Table>
             <InputGroup>

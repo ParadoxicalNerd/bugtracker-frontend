@@ -1,12 +1,10 @@
 import * as React from 'react'
 import { parse, stringify } from 'query-string'
 import { Button, Card, CardGroup, Col, Container, Form, FormControl, FormGroup, InputGroup, Row, Table } from 'react-bootstrap';
-import { Ticket, ticketPriority, ticketPriorityArray, ticketStatusArray, ticketTypesArray } from "../models/Ticket";
 import { useHistory, useLocation, useParams, useRouteMatch, Switch, Route } from 'react-router'
 import { Spinner } from 'react-bootstrap'
 import ticketAccessor from '../controller/TicketAccessor';
 import usernamesAccessor from '../controller/UsersAccessor';
-import { User } from '../models/User';
 import TicketEditorView from './TicketEditorView'
 import TicketDisplayView from './TicketDisplayView';
 

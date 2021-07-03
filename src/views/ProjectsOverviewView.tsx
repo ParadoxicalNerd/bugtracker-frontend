@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Container, FormControl, InputGroup, Table, Spinner } from 'react-bootstrap'
 import { Redirect, useHistory } from 'react-router'
 import useProjectsInfoQuery from '../controller/ProjectsOverviewAccessor'
-import { Project } from '../models/Project'
+import { Project } from '../models';
 
 const ProjectsOverviewView = () => {
 
@@ -45,13 +45,13 @@ const ProjectsOverviewView = () => {
                 <tbody>
                     {
                         data.allProjects
-                            .filter(val => val.description.toLowerCase().includes(searchQuery.toLowerCase())
+                            .filter(val => val.description ? val.description.toLowerCase().includes(searchQuery.toLowerCase()) : false
                                 || val.name.toLowerCase().includes(searchQuery.toLowerCase()))
                             .map(val => (
                                 <tr key={val.id} onClick={() => viewProject(val.id)} style={{ cursor: "pointer" }}>
                                     <td>{val.name}</td>
                                     <td>{val.description}</td>
-                                    <td>{val.createdBy.name}</td>
+                                    <td>{val.author.name}</td>
                                     <td>{val.creationDate}</td>
                                 </tr>
                             ))

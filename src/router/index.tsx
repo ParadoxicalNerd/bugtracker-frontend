@@ -10,26 +10,24 @@ import UserStatsView from "../views/UserStatsView";
 import Helmet from 'react-helmet'
 import HomeView from "../views/HomeView";
 
-const userID = 2
+const userID = "9fdb3323-184b-4b10-a748-eaa930a64bc3"
 const userName = "Pankaj"
 
 export default () => (
-    <HashRouter>
+    <>
         <Switch>
             <Route exact path='/'>
-                <>
-                    <Helmet>
-                        <title>Home</title>
-                    </Helmet>
-                    <UserContext.Provider value={{ userID: userID, username: userName }}>
-                        <HomeView />
-                    </UserContext.Provider>
-                </>
+                <Helmet>
+                    <title>Bugtracker | Home</title>
+                </Helmet>
+                <UserContext.Provider value={{ userID: userID, username: userName }}>
+                    <HomeView />
+                </UserContext.Provider>
             </Route>
 
             <Route exact path="/projects">
                 <Helmet>
-                    <title>Projects Overview</title>
+                    <title>Bugtracker | Projects Overview</title>
                 </Helmet>
 
                 <ProjectsOverviewView />
@@ -37,7 +35,7 @@ export default () => (
 
             <Route path="/projects/:projectID">
                 <Helmet>
-                    <title>Project Details</title>
+                    <title>Bugtracker | Project Details</title>
                 </Helmet>
                 {/* TODO: Decide on best path name */}
                 <ProjectInfoView />
@@ -45,14 +43,14 @@ export default () => (
 
             <Route path="/ticket/:ticketID">
                 <Helmet>
-                    <title>Ticket Details</title>
+                    <title>Bugtracker | Ticket Details</title>
                 </Helmet>
                 <TicketView />
             </Route>
 
             <Route path="/userstats">
                 <Helmet>
-                    <title>User stats</title>
+                    <title>Bugtracker | User stats</title>
                 </Helmet>
 
                 <UserContext.Provider value={{ userID: userID, username: userName }}>
@@ -62,7 +60,7 @@ export default () => (
 
             <Route path="/userroles">
                 <Helmet>
-                    <title>User roles</title>
+                    <title>Bugtracker | User roles</title>
                 </Helmet>
                 <ManageUserRolesView />
             </Route>
@@ -71,5 +69,5 @@ export default () => (
                 <h1>I'm a trash mamal</h1>
             </Route>
         </Switch>
-    </HashRouter>
+    </>
 )

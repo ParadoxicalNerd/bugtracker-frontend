@@ -7,18 +7,13 @@ const PROJECTS_QUERY = `
         allProjects{
             id
             name
-            description
-            author {
-                name
-            }
-            creationDate
         }
     }
 `
 
-const useProjectsInfoQuery = () => {
+const useProjectNamesInfoQuery = () => {
     const [result, reexecuteQuery] = useQuery<{ allProjects: [Project] }>({ query: PROJECTS_QUERY })
     return { ...result }
 }
 
-export default useProjectsInfoQuery
+export default useProjectNamesInfoQuery

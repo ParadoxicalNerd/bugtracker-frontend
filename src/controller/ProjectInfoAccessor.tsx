@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useQuery } from 'urql'
-import { Project } from "../models/Project";
+import { Project } from "../models";
 
 const PROJECT_QUERY = `
 query ProjectQuery($ID:ID){
@@ -16,7 +16,7 @@ query ProjectQuery($ID:ID){
       tickets{
         id
         title
-        createdBy {
+        author {
           name
         }
         assignedTo {

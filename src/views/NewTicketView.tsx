@@ -1,20 +1,15 @@
 import * as React from "react"
-import { Row } from "react-bootstrap"
-import { Card, Form, Col, Container, Button } from "react-bootstrap"
-import { Redirect, useHistory, useLocation, useRouteMatch } from "react-router"
-import { Link } from "react-router-dom"
+import { Card, Container, Form, Row, Col, Button } from "react-bootstrap"
+import useProjectNamesInfoQuery from "../controller/ProjectNamesAccessor"
+import { Project } from "../models";
 import { Ticket, TicketPriority, TicketStatus, TicketTypes } from "../models";
 import { User } from "../models";
 
-const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }) => {
+const formSubmit = () => {
 
-    let { url } = useRouteMatch()
-    const history = useHistory()
+}
 
-    const formSubmit = () => {
-        history.push(url)
-        {/* TODO: Implement actual functionality */ }
-    }
+const CreateNewTicket = ({ allProjects, allUsers }: { allProjects: Project[], allUsers: User[] }) => {
 
     return (
         <Container>
@@ -23,10 +18,9 @@ const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }
                     <Form onSubmit={formSubmit}>
                         <Row>
                             <Col>
-                                <Card.Title><h3>Edit Ticket</h3></Card.Title>
-                                <Card.Subtitle>Change Ticket Properties</Card.Subtitle>
+                                <Card.Title><h3>Create new ticket</h3></Card.Title>
                             </Col>
-                            <Col md="auto"><Button size="sm" type="submit">Submit{/*<Link to={url}>Save</Link>*/}</Button></Col>
+                            <Col md="auto"><Button size="sm" type="submit">Submit</Button></Col>
                         </Row>
                         <Container className="my-4">
 
@@ -34,17 +28,40 @@ const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }
                                 <Col>
                                     <Form.Group controlId="ticketEdit.title">
                                         <Form.Label className="mt-2">Ticket Title </Form.Label>
-                                        <Form.Control placeholder={ticket.title} />
+                                        <Form.Control />
                                     </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="ticketEdit.description">
                                         <Form.Label className="mt-2">Ticket Description </Form.Label>
-                                        <Form.Control as="textarea" placeholder={ticket.description} />
+                                        <Form.Control as="textarea" />
                                     </Form.Group>
                                 </Col>
                             </Row>
 
+                            <Row>
+                                <Col>
+                                    <Form.Group controlId="ticketEdit.project">
+                                        <Form.Label className="mt-2">Project </Form.Label>
+                                        <Form.Control as="select" >
+                                            {allProjects.map(project => (
+                                                <option key={project.name}>{project.name}</option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+
+                                </Col>
+                                <Col>
+                                    <Form.Group controlId="ticketEdit.ticketPriority">
+                                        <Form.Label className="mt-2">Ticket Priority </Form.Label>
+                                        <Form.Control as="select">
+                                            {Object.keys(TicketPriority).map(priority => (
+                                                <option key={priority}>{priority}</option>
+                                            ))}
+                                        </Form.Control>
+                                    </Form.Group>
+                                </Col>
+                            </Row>
                             <Row>
                                 <Col>
                                     <Form.Group controlId="ticketEdit.assignedDeveloper">
@@ -55,34 +72,11 @@ const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }
                                             ))}
                                         </Form.Control>
                                     </Form.Group>
-
-                                </Col>
-                                <Col>
-                                    <Form.Group controlId="ticketEdit.ticketPriority">
-                                        <Form.Label className="mt-2">Ticket Priority </Form.Label>
-                                        <Form.Control as="select" defaultValue={ticket.priority}>
-                                            {Object.keys(TicketPriority).map(priority => (
-                                                <option key={priority}>{priority}</option>
-                                            ))}
-                                        </Form.Control>
-                                    </Form.Group>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col>
-                                    <Form.Group controlId="ticketEdit.ticketStatus">
-                                        <Form.Label className="mt-2">Ticket Status </Form.Label>
-                                        <Form.Control as="select" defaultValue={ticket.status}>
-                                            {Object.keys(TicketStatus).map(status => (
-                                                <option key={status}>{status}</option>
-                                            ))}
-                                        </Form.Control>
-                                    </Form.Group>
                                 </Col>
                                 <Col>
                                     <Form.Group controlId="ticketEdit.ticketType">
                                         <Form.Label className="mt-2">Ticket Type </Form.Label>
-                                        <Form.Control as="select" defaultValue={ticket.type}>
+                                        <Form.Control as="select">
                                             {Object.keys(TicketTypes).map(type => (
                                                 <option key={type}>{type}</option>
                                             ))}
@@ -99,4 +93,6 @@ const ticketEditor = ({ ticket, allUsers }: { ticket: Ticket, allUsers: User[] }
     )
 }
 
-export default ticketEditor
+export default () => {
+    const { } = useProjectNamesInfoQuery
+}

@@ -1,39 +1,39 @@
 import * as React from 'react'
 import { useQuery } from 'urql'
-import { Ticket } from '../models/Ticket'
+import { Ticket } from '../models';
 
 
 const TICKET_QUERY = `
 query TicketQuery ($ID:ID) {
-    ticket(id:$ID) {
+  ticket(id:$ID) {
+    id
+    title
+    description
+    author {
+      name
+    }
+    assignedTo {
+      name
+    }
+    project {
+      name
       id
-      title
-      description
-      createdBy {
-        name
-      }
-      assignedTo {
-        name
-      }
-      project {
-        name
-        id
-      }
-      priority
-      status
-      ofType
+    }
+    priority
+    status
+    type
+    creationDate
+    updateDate
+    comments {
+      id
+      message
       creationDate
-      updateDate
-      comments {
-        id
-        message
-        creationDate
-        createdBy{
-          name
-        }
+      author{
+        name
       }
     }
   }
+}
 `
 
 const ticketAccessor = (ticketID: string) => {

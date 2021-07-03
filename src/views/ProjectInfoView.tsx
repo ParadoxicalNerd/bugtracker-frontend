@@ -1,13 +1,13 @@
 import * as React from 'react'
 import { Card, CardGroup, Container, Table, Spinner } from 'react-bootstrap'
 import { useHistory } from 'react-router'
-import { Project } from '../models/Project'
-import { Ticket } from '../models/Ticket'
-import { User } from '../models/User'
+import { Maybe, Project } from '../models';
+import { Ticket } from '../models';
+import { User } from '../models';
 import { useParams } from "react-router-dom";
 import useProjectInfoAccessor from '../controller/ProjectInfoAccessor'
 
-const AssignedPersonel: React.FC<{ associatedUsers: User[] }> = ({ associatedUsers }) => (
+const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undefined }> = ({ associatedUsers }) => (
     <Table striped hover responsive>
         <thead>
             <tr>
@@ -16,22 +16,24 @@ const AssignedPersonel: React.FC<{ associatedUsers: User[] }> = ({ associatedUse
             </tr>
         </thead>
         <tbody>
-            {associatedUsers.map((user: User) => (
-                <tr key={user.id}>
+            {associatedUsers ? associatedUsers.map((user: User | null) => {
+                user ? <tr key={user.id}>
                     <td>{user.name}</td>
                     <td>{user.email}</td>
-                </tr>
-            ))}
+                </tr> : undefined
+            }) : undefined}
         </tbody>
     </Table >
 )
 
-const TicketsForProject: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
+const TicketsForProject: React.FC<{ tickets: Maybe<Maybe<Ticket>[]> | undefined }> = ({ tickets }) => {
     const history = useHistory();
 
     const viewTicket = (ticketID: string) => {
         history.push(`/ticket/${ticketID}`)
     }
+
+    console.log(tickets)
 
     return (
         <Table striped hover responsive>
@@ -45,17 +47,17 @@ const TicketsForProject: React.FC<{ tickets: Ticket[] }> = ({ tickets }) => {
                 </tr>
             </thead>
             <tbody>
-                {tickets.map(ticket => (
-                    <tr key={ticket.id} onClick={() => viewTicket(ticket.id)} style={{ cursor: "pointer" }}>
-                        <td>{ticket.title}</td>
-                        <td>{ticket.createdBy.name}</td>
-                        <td>
-                            {ticket.assignedTo.name}
-                        </td>
-                        <td>{ticket.status}</td>
-                        <td>{ticket.creationDate}</td>
-                    </tr>
-                ))}
+                {
+                    tickets!.map(ticket => (
+                        <tr key={ticket?.id} onClick={() => viewTicket(ticket!.id)} style={{ cursor: "pointer" }}>
+                            <td>{ticket?.title}</td>
+                            <td>{ticket?.author.name}</td>
+                            <td>{ticket?.assignedTo ? ticket?.assignedTo.name : "Unassigned"}</td>
+                            <td>{ticket?.status}</td>
+                            <td>{ticket?.creationDate}</td>
+                        </tr>
+                    ))
+                }
             </tbody>
         </Table >
     )

@@ -6,6 +6,22 @@ Empty project.
 
 1. Convert all <Link> component to on Formsubmit as seen in TicketEditorView
 
+2. Export as excel
+
+3. Integration in and integration out -> Prisma
+
+4. Pivot Table
+
+5. Export as reports
+
+6. Filtering data
+
+7. Success Ratio
+
+8. User info by management
+
+9. Either turn all controller exports to *accesors or *query
+
 ## Building and running on localhost
 
 First install dependencies:

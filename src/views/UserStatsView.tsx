@@ -2,13 +2,13 @@ import * as React from 'react';
 import { Card, CardGroup, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Component, useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
-import { Ticket, ticketPriority, ticketStatus, ticketTypes, ticketTypesArray } from '../models/Ticket';
+import { Maybe, Ticket, TicketPriority, TicketStatus, TicketTypes } from '../models';
 import userStatsAccerssor from '../controller/UserStatsAccessor';
 import UserContext from '../context/UserContext';
 // Cannot use treeshaking for Chart. Gotta import everything. Read this:
 // https://www.chartjs.org/docs/latest/getting-started/integration.html#bundlers-webpack-rollup-etc
 
-const TicketPriorityView = ({ tickets }: { tickets: [Ticket] }) => {
+const TicketPriorityView = ({ tickets }: { tickets: Maybe<Maybe<Ticket>[]> | undefined }) => {
 
     let TICKET_INFO = {
         "UNKNOWN": {
@@ -31,8 +31,10 @@ const TicketPriorityView = ({ tickets }: { tickets: [Ticket] }) => {
 
     let canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-    tickets.forEach((val) => {
-        if (val.status != ticketStatus.RESOLVED) TICKET_INFO[ticketPriority[val.priority]].value++
+    TICKET_INFO[TicketPriority.Unknown]
+
+    tickets?.forEach((val) => {
+        if (val && val.status != TicketStatus.Resolved) TICKET_INFO[val.priority].value++
     })
 
     const data = {
@@ -50,7 +52,7 @@ const TicketPriorityView = ({ tickets }: { tickets: [Ticket] }) => {
         },
         plugins: {
             legend: {
-                position: 'right'
+                // position: "right"
             },
             // title: {
             //     display: true,
@@ -102,7 +104,7 @@ const TicketPriorityView = ({ tickets }: { tickets: [Ticket] }) => {
     )
 }
 
-const TicketTypeView = ({ tickets }: { tickets: [Ticket] }) => {
+const TicketTypeView = ({ tickets }: { tickets: Maybe<Maybe<Ticket>[]> | undefined }) => {
 
     let TICKET_INFO = {
         "BUG": {
@@ -119,8 +121,8 @@ const TicketTypeView = ({ tickets }: { tickets: [Ticket] }) => {
 
     let canvasRef = useRef<HTMLCanvasElement | null>(null)
 
-    tickets.forEach((val) => {
-        if (val.status != ticketStatus.RESOLVED) TICKET_INFO[ticketTypes[val.ofType]].value++
+    tickets?.forEach((val) => {
+        if (val && val.status != TicketStatus.Resolved) TICKET_INFO[val.type].value++
         // Ensures we only count open tickets
     })
 
@@ -213,13 +215,17 @@ export default () => {
 
     if (fetching) return <Spinner animation="border" variant="primary" />
 
-    if (error || data == undefined) return <h1>Unexpected Error</h1>
+    if (error || data == undefined) {
+        console.log(error)
+        console.log(data)
+        return <h1>Unexpected Error</h1>
+    }
 
     return (
 
         <CardGroup>
-            <TicketPriorityView tickets={data.user.tickets} />
-            <TicketTypeView tickets={data.user.tickets} />
+            <TicketPriorityView tickets={data.user.ticketsAuthored} />
+            <TicketTypeView tickets={data.user.ticketsAuthored} />
         </CardGroup>
 
     )
