@@ -6,6 +6,8 @@ import ProjectInfoView from "../views/ProjectInfoView";
 import ProjectsOverviewView from "../views/ProjectsOverviewView";
 import TicketView from "../views/TicketView";
 import UserStatsView from "../views/UserStatsView";
+import CreatorView from "../views/CreatorView";
+import NewTicketView from "../views/NewTicketView";
 
 import Helmet from 'react-helmet'
 import HomeView from "../views/HomeView";
@@ -63,6 +65,14 @@ export default () => (
                     <title>Bugtracker | User roles</title>
                 </Helmet>
                 <ManageUserRolesView />
+            </Route>
+
+            <Route path='/creator'>
+                <CreatorView />
+            </Route>
+
+            <Route path='/newTicket'>
+                <NewTicketView />
             </Route>
 
             <Route path='/trash'>

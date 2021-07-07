@@ -26,7 +26,7 @@ export default () => {
                 <Nav.Link className="px-3" href="#/userstats">User stats</Nav.Link>
                 <Nav.Link className="px-3" href="#/userroles">User roles</Nav.Link>
             </Nav>
-            <Button variant="primary" className="mx-2">New Ticket</Button>
+            <Button variant="primary" className="mx-2" href="#/newTicket">New Ticket</Button>
         </Navbar.Collapse>
     </Navbar>
 }

@@ -4,7 +4,7 @@ import { Ticket } from '../models';
 
 
 const TICKET_QUERY = `
-query TicketQuery ($ID:ID) {
+query TicketQuery ($ID:ID!) {
   ticket(id:$ID) {
     id
     title

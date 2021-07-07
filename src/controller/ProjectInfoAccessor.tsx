@@ -3,7 +3,7 @@ import { useQuery } from 'urql'
 import { Project } from "../models";
 
 const PROJECT_QUERY = `
-query ProjectQuery($ID:ID){
+query ProjectQuery($ID:ID!){
     project(id:$ID){
       id
       name

@@ -4,7 +4,7 @@ import { useQuery } from 'urql'
 import { User } from '../models';
 
 const USERSTATS_QUERY = `
-    query UserstatsQuery($ID:ID){
+    query UserstatsQuery($ID:ID!){
         user(id:$ID){
             ticketsAuthored {
                 priority

@@ -1,6 +1,6 @@
 import * as React from "react"
 import { useQuery } from "urql";
-import { Project } from "../models";
+import { Project, User } from "../models";
 
 const USER_NAMES_QUERY = `
     {
@@ -12,7 +12,7 @@ const USER_NAMES_QUERY = `
 `
 
 const useUsernamesAccessor = () => {
-    const [result, reexecuteQuery] = useQuery<{ allProjects: [Project] }>({ query: USER_NAMES_QUERY })
+    const [result, reexecuteQuery] = useQuery<{ allUsers: [User] }>({ query: USER_NAMES_QUERY })
     return { ...result }
 }
 
