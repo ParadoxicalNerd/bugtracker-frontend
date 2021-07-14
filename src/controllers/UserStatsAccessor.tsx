@@ -16,7 +16,7 @@ const USERSTATS_QUERY = `
 `
 
 const userStatsAccerssor = (userID: string) => {
-    const [result, reexecuteQuery] = useQuery<{ user: User }>({ query: USERSTATS_QUERY, variables: { ID: userID } })
+    const [result, executeQuery] = useQuery<{ user: User }>({ query: USERSTATS_QUERY, variables: { ID: userID } })
     return { ...result }
 }
 

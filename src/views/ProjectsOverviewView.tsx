@@ -1,14 +1,14 @@
 import * as React from 'react'
 import { Container, FormControl, InputGroup, Table, Spinner } from 'react-bootstrap'
 import { Redirect, useHistory } from 'react-router'
-import useProjectsInfoQuery from '../controller/ProjectsOverviewAccessor'
+import projectsInfoAccessor from '../controllers/ProjectsOverviewAccessor'
 import { Project } from '../models';
 
 const ProjectsOverviewView = () => {
 
     // All react hooks
 
-    const { data, error, fetching } = useProjectsInfoQuery()
+    const { data, error, fetching } = projectsInfoAccessor()
 
     const [searchQuery, setSearchQuery] = React.useState("")
 

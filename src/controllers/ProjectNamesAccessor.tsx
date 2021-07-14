@@ -11,9 +11,9 @@ const PROJECTS_QUERY = `
     }
 `
 
-const useProjectNamesInfoQuery = () => {
-    const [result, reexecuteQuery] = useQuery<{ allProjects: [Project] }>({ query: PROJECTS_QUERY })
+const projectNamesAccessor = () => {
+    const [result, executeQuery] = useQuery<{ allProjects: [Project] }>({ query: PROJECTS_QUERY })
     return { ...result }
 }
 
-export default useProjectNamesInfoQuery
+export default projectNamesAccessor

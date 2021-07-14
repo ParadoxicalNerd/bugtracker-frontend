@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Card, CardColumns, Form, Container, Button, Spinner, CardGroup, Table } from 'react-bootstrap'
-import useUsernameAccessor from '../controller/UsersAccessor';
-import UsernamesAccessor from '../controller/UsersAccessor';
+import usersAccessor from '../controllers/UsersAccessor';
+import UsernamesAccessor from '../controllers/UsersAccessor';
 import { User, UserType } from '../models';
 
 // let a;
@@ -130,7 +130,7 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
 }
 
 export default () => {
-    const { data: usersData, error: usersError, fetching: usersFetching } = useUsernameAccessor()
+    const { data: usersData, error: usersError, fetching: usersFetching } = usersAccessor()
 
     // const [users, setUsers] = React.useState<User[] | undefined>(undefined)
 

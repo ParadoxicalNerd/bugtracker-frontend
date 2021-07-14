@@ -3,7 +3,7 @@ import { Card, CardGroup, Col, Container, Row, Spinner } from 'react-bootstrap'
 import { Component, useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 import { Maybe, Ticket, TicketPriority, TicketStatus, TicketTypes } from '../models';
-import userStatsAccerssor from '../controller/UserStatsAccessor';
+import userStatsAccessor from '../controllers/UserStatsAccessor';
 import UserContext from '../context/UserContext';
 // Cannot use treeshaking for Chart. Gotta import everything. Read this:
 // https://www.chartjs.org/docs/latest/getting-started/integration.html#bundlers-webpack-rollup-etc
@@ -209,7 +209,7 @@ export default () => {
 
     const { userID } = React.useContext(UserContext)
 
-    const { data, error, fetching } = userStatsAccerssor(userID)
+    const { data, error, fetching } = userStatsAccessor(userID)
 
     // console.log(data)
 

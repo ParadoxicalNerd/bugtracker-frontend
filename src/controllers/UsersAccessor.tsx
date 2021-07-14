@@ -12,9 +12,9 @@ query usenames {
 }
   `
 
-const useUsernameAccessor = () => {
-  const [result, reexecuteQuery] = useQuery<{ allUsers: User[] }>({ query: UsernameQuery })
+const usersAccessor = () => {
+  const [result, executeQuery] = useQuery<{ allUsers: User[] }>({ query: UsernameQuery })
   return { ...result }
 }
 
-export default useUsernameAccessor
+export default usersAccessor

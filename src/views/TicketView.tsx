@@ -3,8 +3,8 @@ import { parse, stringify } from 'query-string'
 import { Button, Card, CardGroup, Col, Container, Form, FormControl, FormGroup, InputGroup, Row, Table } from 'react-bootstrap';
 import { useHistory, useLocation, useParams, useRouteMatch, Switch, Route } from 'react-router'
 import { Spinner } from 'react-bootstrap'
-import ticketAccessor from '../controller/TicketAccessor';
-import usernamesAccessor from '../controller/UsersAccessor';
+import ticketAccessor from '../controllers/TicketAccessor';
+import usernamesAccessor from '../controllers/UsersAccessor';
 import TicketEditorView from './TicketEditorView'
 import TicketDisplayView from './TicketDisplayView';
 

@@ -11,9 +11,9 @@ const USER_NAMES_QUERY = `
     }
 `
 
-const useUsernamesAccessor = () => {
-    const [result, reexecuteQuery] = useQuery<{ allUsers: [User] }>({ query: USER_NAMES_QUERY })
+const usernamesAccessor = () => {
+    const [result, executeQuery] = useQuery<{ allUsers: [User] }>({ query: USER_NAMES_QUERY })
     return { ...result }
 }
 
-export default useUsernamesAccessor
+export default usernamesAccessor

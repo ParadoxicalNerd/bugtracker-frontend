@@ -37,7 +37,7 @@ query TicketQuery ($ID:ID!) {
 `
 
 const ticketAccessor = (ticketID: string) => {
-  const [result, reexecuteQuery] = useQuery<{ ticket: Ticket }>({ query: TICKET_QUERY, variables: { ID: ticketID } })
+  const [result, executeQuery] = useQuery<{ ticket: Ticket }>({ query: TICKET_QUERY, variables: { ID: ticketID } })
   return { ...result }
 }
 

@@ -176,6 +176,7 @@ export type TicketCreateInput = {
   type: TicketTypes;
   status: TicketStatus;
   priority: TicketPriority;
+  assignedTo?: Maybe<Scalars['ID']>;
 };
 
 export enum TicketPriority {

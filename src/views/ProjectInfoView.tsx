@@ -5,7 +5,7 @@ import { Maybe, Project } from '../models';
 import { Ticket } from '../models';
 import { User } from '../models';
 import { useParams } from "react-router-dom";
-import useProjectInfoAccessor from '../controller/ProjectInfoAccessor'
+import projectInfoAccessor from '../controllers/ProjectInfoAccessor'
 
 const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undefined }> = ({ associatedUsers }) => (
     <Table striped hover responsive>
@@ -108,7 +108,7 @@ export default () => {
 
     const { projectID } = useParams<{ projectID: string }>();
 
-    const { data, error, fetching } = useProjectInfoAccessor(projectID)
+    const { data, error, fetching } = projectInfoAccessor(projectID)
 
     // console.log(data)
 

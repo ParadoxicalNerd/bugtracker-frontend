@@ -10,6 +10,6 @@ query UserType ($ID:ID) {
 `
 
 const useUserTypeAccessor = (userID: string) => {
-  const [result, reexecuteQuery] = useQuery<{ user: User }>({ query: USER_TYPE_QUERY, variables: { ID: userID } })
+  const [result, executeQuery] = useQuery<{ user: User }>({ query: USER_TYPE_QUERY, variables: { ID: userID } })
   return result
 }
