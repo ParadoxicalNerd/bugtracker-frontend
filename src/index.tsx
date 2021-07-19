@@ -1,29 +1,32 @@
-import * as React from 'react';
+import * as React from "react";
 import * as ReactDOM from "react-dom";
 
-import { createClient, Provider, defaultExchanges } from 'urql';
-import { devtoolsExchange } from '@urql/devtools';
+import { createClient, Provider, defaultExchanges } from "urql";
+import { devtoolsExchange } from "@urql/devtools";
 
-import App from './App';
+import App from "./App";
 import "./styles.scss";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { HashRouter } from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter } from "react-router-dom";
 
-import Navbar from './components/navbar'
+import Navbar from "./components/navbar";
+
+fetch("/hi").then((res) => console.log(res));
 
 const client = createClient({
-    url: `http://localhost:4000/graphql`, //TODO: Check this fucker out
+    url: `/graphql`, //TODO: Check this fucker out
     exchanges: [devtoolsExchange, ...defaultExchanges],
-})
+});
 
 let mountNode = document.getElementById("app");
 
 ReactDOM.render(
     <Provider value={client}>
-        <HashRouter>
+        {/* INFO: Routing issue https://ui.dev/react-router-cannot-get-url-refresh/ */}
+        <BrowserRouter>
             <App />
-        </HashRouter>
+        </BrowserRouter>
     </Provider>,
     mountNode
 );
