@@ -17,14 +17,14 @@ export default () => {
             static="top"
             style={{ alignItems: "center" }}
         >
-            <Navbar.Brand href="/" className="px-5">
+            <Navbar.Brand href="/home" className="px-5">
                 <img src="favicon.ico" width="30" height="30" />
                 <span className="px-1">Bug Tracker</span>
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbar" />
             <Navbar.Collapse id="navbar">
                 <Nav className="mr-auto">
-                    <Nav.Link className="px-3" href="/">
+                    <Nav.Link className="px-3" href="/home">
                         Home
                     </Nav.Link>
                     <Nav.Link className="px-3" href="/projects">

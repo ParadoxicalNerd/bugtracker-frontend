@@ -90,7 +90,7 @@ const CreateNewTicket = ({
             };
 
             const variables = {
-                authorID: userID,
+                userID: userID,
                 projectID: formValue.project,
                 data: ticketInput,
             };
@@ -318,7 +318,7 @@ const CreateNewTicket = ({
                 </Modal.Header>
                 <Modal.Body>Your ticket has been created!</Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => history.push("/")}>Close</Button>
+                    <Button onClick={() => history.push("/home")}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

@@ -1,5 +1,5 @@
-import * as React from "react"
-import { BrowserRouter, HashRouter, Link, Redirect, Route, Switch } from 'react-router-dom';
+import * as React from "react";
+import { BrowserRouter, HashRouter, Link, Redirect, Route, Switch } from "react-router-dom";
 import UserContext from "../context/UserContext";
 import ManageUserRolesView from "../views/ManageUserRolesView";
 import ProjectInfoView from "../views/ProjectInfoView";
@@ -9,16 +9,24 @@ import UserStatsView from "../views/UserStatsView";
 import CreatorView from "../views/CreatorView";
 import NewTicketView from "../views/NewTicketView";
 
-import Helmet from 'react-helmet'
+import Helmet from "react-helmet";
 import HomeView from "../views/HomeView";
+import RootView from "../views/RootView";
 
-const userID = "9fdb3323-184b-4b10-a748-eaa930a64bc3"
-const userName = "Pankaj"
+const userID = "----";
+const userName = "----";
 
 export default () => (
     <>
         <Switch>
-            <Route exact path='/'>
+            <Route exact path="/">
+                <Helmet>
+                    <title>Bugtracker | Root </title>
+                </Helmet>
+                <RootView />
+            </Route>
+
+            <Route exact path={"/home"}>
                 <Helmet>
                     <title>Bugtracker | Home</title>
                 </Helmet>
@@ -67,17 +75,17 @@ export default () => (
                 <ManageUserRolesView />
             </Route>
 
-            <Route path='/creator'>
+            <Route path="/creator">
                 <CreatorView />
             </Route>
 
-            <Route path='/newTicket'>
+            <Route path="/newTicket">
                 <NewTicketView />
             </Route>
 
-            <Route path='/trash'>
+            <Route path="/trash">
                 <h1>I'm a trash mamal</h1>
             </Route>
         </Switch>
     </>
-)
+);

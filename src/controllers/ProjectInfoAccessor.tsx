@@ -1,10 +1,10 @@
-import * as React from "react"
-import { useQuery } from 'urql'
+import * as React from "react";
+import { useQuery } from "urql";
 import { Project } from "../models";
 
 const PROJECT_QUERY = `
-query ProjectQuery($ID:ID!){
-    project(id:$ID){
+query ProjectQuery($projectID:ID!){
+    project(id:$projectID){
       id
       name
       description
@@ -27,15 +27,17 @@ query ProjectQuery($ID:ID!){
       }
     }
   }
-`
+`;
 
 const projectInfoAccessor = (projectID: string) => {
-  // const { fetching, error, data } = useQuery<{ project: Project }>(PROJECT_QUERY, { variables: { ID: projectID } })
-  // return { fetching, error, data }
-  const [result, executeQuery] = useQuery<{ project: Project }>({ query: PROJECT_QUERY, variables: { ID: projectID } })
-  // const { data, fetching, error } : { project: Project, any, any } = result;
-  return result
+    // const { fetching, error, data } = useQuery<{ project: Project }>(PROJECT_QUERY, { variables: { ID: projectID } })
+    // return { fetching, error, data }
+    const [result, executeQuery] = useQuery<{ project: Project }>({
+        query: PROJECT_QUERY,
+        variables: { projectID: projectID },
+    });
+    // const { data, fetching, error } : { project: Project, any, any } = result;
+    return result;
+};
 
-}
-
-export default projectInfoAccessor
+export default projectInfoAccessor;

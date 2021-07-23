@@ -12,11 +12,15 @@ import { BrowserRouter } from "react-router-dom";
 
 import Navbar from "./components/navbar";
 
-fetch("/hi").then((res) => console.log(res));
-
 const client = createClient({
-    url: `/graphql`, //TODO: Check this fucker out
+    url: `http://localhost:4000/graphql`, //TODO: Check this fucker out
     exchanges: [devtoolsExchange, ...defaultExchanges],
+    fetchOptions: {
+        credentials: "include",
+        headers: {
+            // "Content-Type": "text/plain",
+        },
+    },
 });
 
 let mountNode = document.getElementById("app");

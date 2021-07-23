@@ -1,11 +1,10 @@
-import * as React from 'react'
-import { useQuery } from 'urql'
-import { Ticket } from '../models';
-
+import * as React from "react";
+import { useQuery } from "urql";
+import { Ticket } from "../models";
 
 const TICKET_QUERY = `
-query TicketQuery ($ID:ID!) {
-  ticket(id:$ID) {
+query TicketQuery ($ticketID:ID!) {
+  ticket(id:$ticketID) {
     id
     title
     description
@@ -34,13 +33,14 @@ query TicketQuery ($ID:ID!) {
     }
   }
 }
-`
+`;
 
 const ticketAccessor = (ticketID: string) => {
-  const [result, executeQuery] = useQuery<{ ticket: Ticket }>({ query: TICKET_QUERY, variables: { ID: ticketID } })
-  return { ...result }
-}
+    const [result, executeQuery] = useQuery<{ ticket: Ticket }>({
+        query: TICKET_QUERY,
+        variables: { ticketID: ticketID },
+    });
+    return { ...result };
+};
 
-
-
-export default ticketAccessor
+export default ticketAccessor;

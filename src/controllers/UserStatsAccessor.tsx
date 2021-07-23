@@ -1,11 +1,11 @@
-import * as React from 'react'
-import { useQuery } from 'urql'
+import * as React from "react";
+import { useQuery } from "urql";
 
-import { User } from '../models';
+import { User } from "../models";
 
 const USERSTATS_QUERY = `
-    query UserstatsQuery($ID:ID!){
-        user(id:$ID){
+    query UserstatsQuery($userID:ID!){
+        user(id:$userID){
             ticketsAuthored {
                 priority
                 type
@@ -13,12 +13,14 @@ const USERSTATS_QUERY = `
             }
         }
     }
-`
+`;
 
 const userStatsAccerssor = (userID: string) => {
-    const [result, executeQuery] = useQuery<{ user: User }>({ query: USERSTATS_QUERY, variables: { ID: userID } })
-    return { ...result }
-}
+    const [result, executeQuery] = useQuery<{ user: User }>({
+        query: USERSTATS_QUERY,
+        variables: { userID },
+    });
+    return { ...result };
+};
 
-
-export default userStatsAccerssor
+export default userStatsAccerssor;

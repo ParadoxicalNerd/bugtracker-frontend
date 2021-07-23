@@ -2,8 +2,8 @@ import { useMutation } from "urql";
 import { TicketCreateInput } from "../models";
 
 const NewTicketQuery = `
-    mutation CreateTicket ($authorID: ID!, $projectID: ID!, $data: TicketCreateInput!) {
-        createTicket(authorID: $authorID, projectID:$projectID, data: $data){
+    mutation CreateTicket ($userID: ID!, $projectID: ID!, $data: TicketCreateInput!) {
+        createTicket(authorID: $userID, projectID:$projectID, data: $data){
         id
         title
         }

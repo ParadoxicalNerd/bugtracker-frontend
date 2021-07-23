@@ -1,15 +1,18 @@
-import { useQuery } from "urql"
+import { useQuery } from "urql";
 import { User } from "../models";
 
 const USER_TYPE_QUERY = `
-query UserType ($ID:ID) {
-    user(id:$ID){
+query UserType ($userID:ID) {
+    user(id:$userID){
       type
     }
 }
-`
+`;
 
 const useUserTypeAccessor = (userID: string) => {
-  const [result, executeQuery] = useQuery<{ user: User }>({ query: USER_TYPE_QUERY, variables: { ID: userID } })
-  return result
-}
+    const [result, executeQuery] = useQuery<{ user: User }>({
+        query: USER_TYPE_QUERY,
+        variables: { userID },
+    });
+    return result;
+};
