@@ -1,13 +1,15 @@
-import * as React from 'react'
-import { Card, CardGroup, Container, Table, Spinner } from 'react-bootstrap'
-import { useHistory } from 'react-router'
-import { Maybe, Project } from '../models';
-import { Ticket } from '../models';
-import { User } from '../models';
+import * as React from "react";
+import { Card, CardGroup, Container, Table, Spinner } from "react-bootstrap";
+import { useHistory } from "react-router";
+import { Maybe, Project } from "../models";
+import { Ticket } from "../models";
+import { User } from "../models";
 import { useParams } from "react-router-dom";
-import projectInfoAccessor from '../controllers/ProjectInfoAccessor'
+import projectInfoAccessor from "../controllers/ProjectInfoAccessor";
 
-const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undefined }> = ({ associatedUsers }) => (
+const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undefined }> = ({
+    associatedUsers,
+}) => (
     <Table striped hover responsive>
         <thead>
             <tr>
@@ -16,24 +18,30 @@ const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undef
             </tr>
         </thead>
         <tbody>
-            {associatedUsers ? associatedUsers.map((user: User | null) => {
-                user ? <tr key={user.id}>
-                    <td>{user.name}</td>
-                    <td>{user.email}</td>
-                </tr> : undefined
-            }) : undefined}
+            {associatedUsers
+                ? associatedUsers.map((user: User | null) => {
+                      user ? (
+                          <tr key={user.id}>
+                              <td>{user.name}</td>
+                              <td>{user.email}</td>
+                          </tr>
+                      ) : undefined;
+                  })
+                : undefined}
         </tbody>
-    </Table >
-)
+    </Table>
+);
 
-const TicketsForProject: React.FC<{ tickets: Maybe<Maybe<Ticket>[]> | undefined }> = ({ tickets }) => {
+const TicketsForProject: React.FC<{ tickets: Maybe<Maybe<Ticket>[]> | undefined }> = ({
+    tickets,
+}) => {
     const history = useHistory();
 
     const viewTicket = (ticketID: string) => {
-        history.push(`/ticket/${ticketID}`)
-    }
+        history.push(`/ticket/${ticketID}`);
+    };
 
-    console.log(tickets)
+    console.log(tickets);
 
     return (
         <Table striped hover responsive>
@@ -47,21 +55,23 @@ const TicketsForProject: React.FC<{ tickets: Maybe<Maybe<Ticket>[]> | undefined 
                 </tr>
             </thead>
             <tbody>
-                {
-                    tickets!.map(ticket => (
-                        <tr key={ticket?.id} onClick={() => viewTicket(ticket!.id)} style={{ cursor: "pointer" }}>
-                            <td>{ticket?.title}</td>
-                            <td>{ticket?.author.name}</td>
-                            <td>{ticket?.assignedTo ? ticket?.assignedTo.name : "Unassigned"}</td>
-                            <td>{ticket?.status}</td>
-                            <td>{ticket?.creationDate}</td>
-                        </tr>
-                    ))
-                }
+                {tickets!.map((ticket) => (
+                    <tr
+                        key={ticket?.id}
+                        onClick={() => viewTicket(ticket!.id)}
+                        style={{ cursor: "pointer" }}
+                    >
+                        <td>{ticket?.title}</td>
+                        <td>{ticket?.author.name}</td>
+                        <td>{ticket?.assignedTo ? ticket?.assignedTo.name : "Unassigned"}</td>
+                        <td>{ticket?.status}</td>
+                        <td>{ticket?.creationDate}</td>
+                    </tr>
+                ))}
             </tbody>
-        </Table >
-    )
-}
+        </Table>
+    );
+};
 
 const ProjectInfoView = (project: Project) => (
     <Container>
@@ -77,7 +87,9 @@ const ProjectInfoView = (project: Project) => (
                     </Card>
                     <Card border="light">
                         <Card.Body>
-                            <Card.Subtitle className="mb-2 text-muted">Project Desctiption</Card.Subtitle>
+                            <Card.Subtitle className="mb-2 text-muted">
+                                Project Desctiption
+                            </Card.Subtitle>
                             <Card.Text>{project.description}</Card.Text>
                         </Card.Body>
                     </Card>
@@ -89,36 +101,38 @@ const ProjectInfoView = (project: Project) => (
             <Card>
                 <Card.Body>
                     <Card.Title>{"Assigned Personel"}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{"Current Users on this project"}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">
+                        {"Current Users on this project"}
+                    </Card.Subtitle>
                     <AssignedPersonel associatedUsers={project.associatedUsers} />
                 </Card.Body>
             </Card>
             <Card>
                 <Card.Body>
                     <Card.Title>{"Tickets for project"}</Card.Title>
-                    <Card.Subtitle className="mb-2 text-muted">{"Summerized tickets for the project"}</Card.Subtitle>
+                    <Card.Subtitle className="mb-2 text-muted">
+                        {"Summerized tickets for the project"}
+                    </Card.Subtitle>
                     <TicketsForProject tickets={project.tickets} />
                 </Card.Body>
             </Card>
         </CardGroup>
     </Container>
-)
+);
 
 export default () => {
-
     const { projectID } = useParams<{ projectID: string }>();
 
-    const { data, error, fetching } = projectInfoAccessor(projectID)
+    const { data, error, fetching } = projectInfoAccessor(projectID);
 
     // console.log(data)
 
-    if (fetching) return <Spinner animation="border" variant="primary" />
+    if (fetching) return <Spinner animation="border" variant="primary" />;
 
-    return (
-        <>
-            {(error || data == undefined) ? <h1>Unexpected Error</h1> :
-                data && ProjectInfoView(data.project)
-            }
-        </>
-    )
-}
+    if (error || data == undefined) {
+        if (process.env.NODE_ENV !== "production") console.log(error);
+        return <h1>Unexpected Error</h1>;
+    }
+
+    return <>{data && ProjectInfoView(data.project)}</>;
+};

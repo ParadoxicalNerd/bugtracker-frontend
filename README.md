@@ -2,9 +2,9 @@
 
 Empty project.
 
-Change '/' route to '/home' so that all logins are correctly forwarded to the backend
+TODO: Use cookie to manage user state
 
-# TODO
+TODO: Redirect all requests to user auth
 
 1. Convert all <Link> component to on Formsubmit as seen in TicketEditorView
 

@@ -17,9 +17,6 @@ const client = createClient({
     exchanges: [devtoolsExchange, ...defaultExchanges],
     fetchOptions: {
         credentials: "include",
-        headers: {
-            // "Content-Type": "text/plain",
-        },
     },
 });
 

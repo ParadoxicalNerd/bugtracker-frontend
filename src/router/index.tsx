@@ -11,7 +11,6 @@ import NewTicketView from "../views/NewTicketView";
 
 import Helmet from "react-helmet";
 import HomeView from "../views/HomeView";
-import RootView from "../views/RootView";
 
 const userID = "----";
 const userName = "----";
@@ -19,14 +18,14 @@ const userName = "----";
 export default () => (
     <>
         <Switch>
-            <Route exact path="/">
+            {/* <Route exact path="/">
                 <Helmet>
                     <title>Bugtracker | Root </title>
                 </Helmet>
                 <RootView />
-            </Route>
+            </Route> */}
 
-            <Route exact path={"/home"}>
+            <Route exact path={["/", "/home"]}>
                 <Helmet>
                     <title>Bugtracker | Home</title>
                 </Helmet>
@@ -47,7 +46,6 @@ export default () => (
                 <Helmet>
                     <title>Bugtracker | Project Details</title>
                 </Helmet>
-                {/* TODO: Decide on best path name */}
                 <ProjectInfoView />
             </Route>
 

@@ -17,7 +17,10 @@ const ProjectsOverviewView = () => {
 
     if (fetching) return <Spinner animation="border" variant="primary" />;
 
-    if (error || data == undefined) return <h1>Unexpected Error</h1>;
+    if (error || data == undefined) {
+        if (process.env.NODE_ENV !== "production") console.log(error);
+        return <h1>Unexpected Error</h1>;
+    }
 
     const setNewSearch = (inputEvent: React.ChangeEvent<HTMLInputElement>) => {
         setSearchQuery(inputEvent.target.value || "");

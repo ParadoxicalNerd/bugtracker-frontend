@@ -37,8 +37,17 @@ export default () => {
                         User roles
                     </Nav.Link>
                 </Nav>
+
                 <Button variant="primary" className="mx-2" href="/newTicket">
                     New Ticket
+                </Button>
+
+                <Button
+                    variant="danger"
+                    className="mx-2"
+                    onClick={() => (location.href = "http://localhost:4000/logout")}
+                >
+                    Logout
                 </Button>
             </Navbar.Collapse>
         </Navbar>
