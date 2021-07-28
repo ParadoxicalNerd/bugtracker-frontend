@@ -6,6 +6,7 @@ import ErrorHandler from "./ErrorHandler";
 import isLoggedIn from "./utils/isLoggedIn";
 
 const App = () => {
+    console.log(isLoggedIn());
     return (
         <ErrorHandler>
             <Navbar />
@@ -28,7 +29,7 @@ const App = () => {
                 <Modal.Footer>
                     <Button
                         variant="primary"
-                        onClick={() => (location.href = "http://localhost:4000/login")}
+                        onClick={() => (location.href = `${process.env.SERVER_URL}/login`)}
                     >
                         Click to login
                     </Button>

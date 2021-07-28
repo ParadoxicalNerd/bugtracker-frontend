@@ -75,3 +75,5 @@ Made with [createapp.dev](https://createapp.dev/)
 -   Preact? : So tihs is a maybe but later I plan to drop this in as an alternative to react. Could be fun
 
 -   Nextjs? : Okay, so I'm just spitballing here, but why not? If I'm already going crazy, I'd better go all the way
+
+Webpack Config for dotenv: https://www.npmjs.com/package/dotenv-webpack

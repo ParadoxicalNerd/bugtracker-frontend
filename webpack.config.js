@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
+const Dotenv = require('dotenv-webpack')
 
 const config = {
   entry: './src/index.tsx',
@@ -43,7 +44,10 @@ const config = {
     alias: {
       'react-dom': '@hot-loader/react-dom'
     }
-  }
+  },
+  plugins: [
+    new Dotenv()
+  ]
 };
 
 module.exports = config;

@@ -104,8 +104,7 @@ export type MutationCreateUserArgs = {
 
 
 export type MutationUpdateUserArgs = {
-  userID?: Maybe<Scalars['ID']>;
-  data?: Maybe<UserCreateInput>;
+  data?: Maybe<UserUpdateInput>;
 };
 
 export type Project = {
@@ -173,6 +172,7 @@ export type Ticket = {
 export type TicketCreateInput = {
   title: Scalars['String'];
   description?: Maybe<Scalars['String']>;
+  project?: Maybe<Scalars['ID']>;
   type: TicketTypes;
   status: TicketStatus;
   priority: TicketPriority;
@@ -201,10 +201,12 @@ export enum TicketTypes {
 }
 
 export type TicketUpdateInput = {
+  title?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   type?: Maybe<TicketTypes>;
   status?: Maybe<TicketStatus>;
   priority?: Maybe<TicketPriority>;
+  assignedTo?: Maybe<Scalars['ID']>;
 };
 
 
@@ -224,7 +226,6 @@ export type User = {
 };
 
 export type UserCreateInput = {
-  /** Doubles as user updater */
   name: Scalars['String'];
   email: Scalars['String'];
   type: UserType;
@@ -236,3 +237,10 @@ export enum UserType {
   Programmer = 'PROGRAMMER',
   Tester = 'TESTER'
 }
+
+export type UserUpdateInput = {
+  /** Doubles as user updater */
+  name?: Maybe<Scalars['String']>;
+  email?: Maybe<Scalars['String']>;
+  type?: Maybe<UserType>;
+};

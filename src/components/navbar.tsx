@@ -24,28 +24,28 @@ export default () => {
             <Navbar.Toggle aria-controls="navbar" />
             <Navbar.Collapse id="navbar">
                 <Nav className="mr-auto">
-                    <Nav.Link className="px-3" href="/home">
+                    <Nav.Link className="px-3" href="/#/home">
                         Home
                     </Nav.Link>
-                    <Nav.Link className="px-3" href="/projects">
+                    <Nav.Link className="px-3" href="/#/projects">
                         Projects
                     </Nav.Link>
-                    <Nav.Link className="px-3" href="/userstats">
+                    <Nav.Link className="px-3" href="/#/userstats">
                         User stats
                     </Nav.Link>
-                    <Nav.Link className="px-3" href="/userroles">
+                    <Nav.Link className="px-3" href="/#/userroles">
                         User roles
                     </Nav.Link>
                 </Nav>
 
-                <Button variant="primary" className="mx-2" href="/newTicket">
+                <Button variant="primary" className="mx-2" href="/#/newTicket">
                     New Ticket
                 </Button>
 
                 <Button
                     variant="danger"
                     className="mx-2"
-                    onClick={() => (location.href = "http://localhost:4000/logout")}
+                    onClick={() => (location.href = `${process.env.SERVER_URL}/logout`)}
                 >
                     Logout
                 </Button>

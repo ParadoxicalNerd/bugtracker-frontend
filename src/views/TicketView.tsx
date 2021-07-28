@@ -1,12 +1,25 @@
-import * as React from 'react'
-import { parse, stringify } from 'query-string'
-import { Button, Card, CardGroup, Col, Container, Form, FormControl, FormGroup, InputGroup, Row, Table } from 'react-bootstrap';
-import { useHistory, useLocation, useParams, useRouteMatch, Switch, Route } from 'react-router'
-import { Spinner } from 'react-bootstrap'
-import ticketAccessor from '../controllers/TicketAccessor';
-import usernamesAccessor from '../controllers/UsersAccessor';
-import TicketEditorView from './TicketEditorView'
-import TicketDisplayView from './TicketDisplayView';
+import * as React from "react";
+import { parse, stringify } from "query-string";
+import {
+    Button,
+    Card,
+    CardGroup,
+    Col,
+    Container,
+    Form,
+    FormControl,
+    FormGroup,
+    InputGroup,
+    Row,
+    Table,
+} from "react-bootstrap";
+import { useHistory, useLocation, useParams, useRouteMatch, Switch, Route } from "react-router";
+import { Spinner } from "react-bootstrap";
+import ticketAccessor from "../controllers/TicketAccessor";
+import usernamesAccessor from "../controllers/UsersAccessor";
+import TicketEditorView from "./TicketEditorView";
+import TicketDisplayView from "./TicketDisplayView";
+import _TicketEditorView from "./TicketEditorView";
 
 // const ticketPriorityDropdownRef = React.useRef<FormGroup | null>(null)
 
@@ -82,25 +95,40 @@ const TicketView = () => {
 
 const TicketView = () => {
     const params = useParams<{ ticketID: string }>();
-    let { search } = useLocation()
+    let { search } = useLocation();
     // let match = useRouteMatch()
     // console.log(match)
-    const search_parameter = parse(search, { parseNumbers: true, parseBooleans: true })
+    const search_parameter = parse(search, { parseNumbers: true, parseBooleans: true });
 
-    const { data: ticket_data, error: ticket_error, fetching: ticket_loading, } = ticketAccessor(params.ticketID)
-    const { data: usernames_data, error: usernames_error, fetching: usernames_loading } = usernamesAccessor()
+    const {
+        data: ticket_data,
+        error: ticket_error,
+        fetching: ticket_loading,
+    } = ticketAccessor(params.ticketID);
+    const {
+        data: usernames_data,
+        error: usernames_error,
+        fetching: usernames_loading,
+    } = usernamesAccessor();
 
     // console.log(ticket_data)
 
-    if (ticket_loading || usernames_loading) return <Spinner animation="border" variant="primary" />
+    if (ticket_loading || usernames_loading)
+        return <Spinner animation="border" variant="primary" />;
 
-    if (ticket_error || ticket_data == undefined || usernames_error || usernames_data == undefined) {
-        return <h1>Unexpected Error</h1>
+    if (
+        ticket_error ||
+        ticket_data == undefined ||
+        usernames_error ||
+        usernames_data == undefined
+    ) {
+        return <h1>Unexpected Error</h1>;
     }
 
     if (search_parameter.edit == undefined && search_parameter.edit != true)
-        return <TicketDisplayView ticket={ticket_data.ticket} />
-    else return <TicketEditorView ticket={ticket_data.ticket} allUsers={usernames_data.allUsers} />
-}
+        return <TicketDisplayView ticket={ticket_data.ticket} />;
+    else
+        return <_TicketEditorView ticket={ticket_data.ticket} allUsers={usernames_data.allUsers} />;
+};
 
-export default TicketView
+export default TicketView;

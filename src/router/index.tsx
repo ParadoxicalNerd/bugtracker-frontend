@@ -11,6 +11,7 @@ import NewTicketView from "../views/NewTicketView";
 
 import Helmet from "react-helmet";
 import HomeView from "../views/HomeView";
+import { Button } from "react-bootstrap";
 
 const userID = "----";
 const userName = "----";
@@ -83,6 +84,16 @@ export default () => (
 
             <Route path="/trash">
                 <h1>I'm a trash mamal</h1>
+            </Route>
+
+            <Route path="/logout">
+                <Button
+                    variant="danger"
+                    className="mx-2"
+                    onClick={() => (location.href = `${process.env.SERVER_URL}/logout`)}
+                >
+                    Logout
+                </Button>
             </Route>
         </Switch>
     </>

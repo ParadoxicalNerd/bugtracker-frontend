@@ -33,6 +33,7 @@ const CreateNewTicket = ({
     const [formValue, setFormValue] = React.useState(hydrator);
     const [formValidated, setFormValidated] = React.useState("");
     const [submissionSuccessful, setSubmissionSuccessful] = React.useState("");
+    const [message, setMessage] = React.useState("");
 
     const { userID } = React.useContext(UserContext);
     const [_, newTicketSubmit] = newTicketMutator();
@@ -68,7 +69,7 @@ const CreateNewTicket = ({
     };
 
     const formValidate = () => {
-        return !("error" in formSchema.validate(formValue));
+        return formSchema.validate(formValue).error === undefined;
     };
 
     const onSubmit = async (event: React.SyntheticEvent) => {
@@ -105,14 +106,11 @@ const CreateNewTicket = ({
                     setSubmissionSuccessful("false");
                 }
             });
-
-            // newTicketSubmit(variables).then((val) => {
-            //     console.log(val);
-            // });
-
-            // newTicketMutator(userID, formValue.project, ticketInput).then((value) => {
-            //     console.log(value);
-            // });
+        } else {
+            setMessage(
+                formSchema.validate(formValue).error?.message ||
+                    "Are you sure have filled in all the fields?"
+            );
         }
     };
 
@@ -290,7 +288,7 @@ const CreateNewTicket = ({
                 <Modal.Header closeButton>
                     <Modal.Title>Form validation failed</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Are you sure have filled in all the fields?</Modal.Body>
+                <Modal.Body>{message}</Modal.Body>
                 <Modal.Footer>
                     <Button onClick={() => setFormValidated("")}>Close</Button>
                 </Modal.Footer>
@@ -318,7 +316,7 @@ const CreateNewTicket = ({
                 </Modal.Header>
                 <Modal.Body>Your ticket has been created!</Modal.Body>
                 <Modal.Footer>
-                    <Button onClick={() => history.push("/home")}>Close</Button>
+                    <Button onClick={() => history.push("#/home")}>Close</Button>
                 </Modal.Footer>
             </Modal>
         </Container>
