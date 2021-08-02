@@ -1,8 +1,7 @@
-import * as React from 'react'
-import { Card, CardColumns, Form, Container, Button, Spinner, CardGroup, Table } from 'react-bootstrap'
-import usersAccessor from '../controllers/UsersAccessor';
-import UsernamesAccessor from '../controllers/UsersAccessor';
-import { User, UserType } from '../models';
+import * as React from "react";
+import { Button, Card, CardGroup, Form, Spinner, Table } from "react-bootstrap";
+import usersAccessor from "../controllers/UsersAccessor";
+import { User, UserType } from "../models";
 
 // let a;
 
@@ -24,42 +23,45 @@ import { User, UserType } from '../models';
 // }
 
 const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
+    const [users, setUsers] = React.useState(_users);
 
-    const [users, setUsers] = React.useState(_users)
-
-    let formValue: { users: string[], role: UserType } = {
+    let formValue: { users: string[]; role: UserType } = {
         users: [],
-        role: UserType.Admin
-    }
+        role: UserType.Admin,
+    };
 
     const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-        const target: any = event.target
+        const target: any = event.target;
         switch (target.name) {
             case "selectUsers":
-                formValue.users = [...target.selectedOptions].map((val: { value: string }) => val.value)
+                formValue.users = [...target.selectedOptions].map(
+                    (val: { value: string }) => val.value
+                );
                 break;
             case "selectRole":
-                formValue.role = target.value
+                formValue.role = target.value;
+                break;
             default:
                 break;
         }
-    }
+    };
 
     const onSubmit = (event: React.SyntheticEvent) => {
-        event.preventDefault()
+        event.preventDefault();
 
-        setUsers(users.map((user) => {
-            if (formValue.users.includes(user.id)) {
-                user.type = formValue.role
-            }
-            return user
-        }))
+        setUsers(
+            users.map((user) => {
+                if (formValue.users.includes(user.id)) {
+                    user.type = formValue.role;
+                }
+                return user;
+            })
+        );
 
         // TODO: Actually send data to server
-    }
+    };
 
     return (
-
         <Card>
             <Card.Body>
                 <Card.Title>Manage User Roles</Card.Title>
@@ -69,8 +71,14 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                             <Card>
                                 <Card.Body>
                                     <Card.Subtitle>Select 1 or more users</Card.Subtitle>
-                                    <Form.Control as="select" multiple className="my-2" onChange={onChange} name="selectUsers">
-                                        {users.map(user => (
+                                    <Form.Control
+                                        as="select"
+                                        multiple
+                                        className="my-2"
+                                        onChange={onChange}
+                                        name="selectUsers"
+                                    >
+                                        {users.map((user) => (
                                             <option value={user.id} key={user.id}>
                                                 {user.name}
                                             </option>
@@ -81,8 +89,13 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                             <Card>
                                 <Card.Body>
                                     <Card.Subtitle>Select a role</Card.Subtitle>
-                                    <Form.Control as="select" className="my-2" onChange={onChange} name="selectRole">
-                                        {Object.keys(UserType).map(role => (
+                                    <Form.Control
+                                        as="select"
+                                        className="my-2"
+                                        onChange={onChange}
+                                        name="selectRole"
+                                    >
+                                        {Object.keys(UserType).map((role) => (
                                             <option value={role} key={role}>
                                                 {role}
                                             </option>
@@ -91,7 +104,7 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                                 </Card.Body>
                             </Card>
                             <Card>
-                                <Button type='submit'>Submit</Button>
+                                <Button type="submit">Submit</Button>
                             </Card>
                         </Form>
                     </Card>
@@ -108,15 +121,13 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {
-                                        users.map((user) => (
-                                            <tr key={user.id}>
-                                                <td>{user.name}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.type}</td>
-                                            </tr>
-                                        ))
-                                    }
+                                    {users.map((user) => (
+                                        <tr key={user.id}>
+                                            <td>{user.name}</td>
+                                            <td>{user.email}</td>
+                                            <td>{user.type}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                         </Card.Body>
@@ -124,23 +135,21 @@ const ManageUserRolesView = ({ users: _users }: { users: User[] }) => {
                 </CardGroup>
                 {/* <CardColumns><Card>Hi</Card></CardColumns> */}
             </Card.Body>
-        </Card >
-
-    )
-}
+        </Card>
+    );
+};
 
 export default () => {
-    const { data: usersData, error: usersError, fetching: usersFetching } = usersAccessor()
+    const { data: usersData, error: usersError, fetching: usersFetching } = usersAccessor();
 
     // const [users, setUsers] = React.useState<User[] | undefined>(undefined)
 
-    if (usersFetching) return <Spinner animation="border" variant="primary" />
+    if (usersFetching) return <Spinner animation="border" variant="primary" />;
 
-    if (usersError || usersData == undefined) return <h1>Unexpected Error</h1>
+    if (usersError || usersData == undefined) return <h1>Unexpected Error</h1>;
 
     // setUsers(usersData.allUsers)
 
-    return <ManageUserRolesView users={usersData.allUsers} />
+    return <ManageUserRolesView users={usersData.allUsers} />;
     // return ManageUserRolesView({ users: users })
-
-}
+};

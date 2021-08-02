@@ -1,7 +1,7 @@
-import * as React from 'react'
-import { Col, Form, Row, ButtonGroup, ToggleButton, Card, Button } from 'react-bootstrap'
+import * as React from "react";
+import { Button, ButtonGroup, Card, Col, Form, Row, ToggleButton } from "react-bootstrap";
 
-const createType = ['Ticket', 'User', 'Project']
+const createType = ["Ticket", "User", "Project"];
 
 export default () => (
     <>
@@ -10,20 +10,30 @@ export default () => (
                 <Form>
                     <Row>
                         <Col>
-                            <Card.Title><h3>Create something new...</h3></Card.Title>
+                            <Card.Title>
+                                <h3>Create something new...</h3>
+                            </Card.Title>
                         </Col>
-                        <Col md="auto"><Button size="sm" type="submit">Submit</Button></Col>
+                        <Col md="auto">
+                            <Button size="sm" type="submit">
+                                Submit
+                            </Button>
+                        </Col>
                     </Row>
                     <Row>
                         <Col>
                             <ButtonGroup toggle>
-                                {
-                                    createType.map((val, id) => (
-                                        <ToggleButton key={id} type='radio' variant='primary' name='createType'>
-                                            {val}
-                                        </ToggleButton>
-                                    ))
-                                }
+                                {createType.map((val, id) => (
+                                    <ToggleButton
+                                        value={val}
+                                        key={id}
+                                        type="radio"
+                                        variant="primary"
+                                        name="createType"
+                                    >
+                                        {val}
+                                    </ToggleButton>
+                                ))}
                             </ButtonGroup>
                         </Col>
                     </Row>
@@ -31,4 +41,4 @@ export default () => (
             </Card.Body>
         </Card>
     </>
-)
+);

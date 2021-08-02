@@ -5,10 +5,9 @@ import * as ReactDOM from "react-dom";
 import { HashRouter } from "react-router-dom";
 import { createClient, defaultExchanges, Provider } from "urql";
 import App from "./App";
-import "./styles.scss";
 
 const client = createClient({
-    url: `${process.env.SERVER_URL}/graphql`,
+    url: `${process.env.REACT_APP_SERVER_URL}/graphql`,
     exchanges: [devtoolsExchange, ...defaultExchanges],
     fetchOptions: {
         credentials: "include",
@@ -17,7 +16,7 @@ const client = createClient({
 
 let mountNode = document.getElementById("app");
 
-console.log(process.env.SERVER_URL);
+console.log(process.env.REACT_APP_SERVER_URL);
 
 ReactDOM.render(
     <Provider value={client}>

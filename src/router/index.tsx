@@ -1,17 +1,16 @@
 import * as React from "react";
-import { BrowserRouter, HashRouter, Link, Redirect, Route, Switch } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Helmet from "react-helmet";
+import { Route, Switch } from "react-router-dom";
 import UserContext from "../context/UserContext";
+import CreatorView from "../views/CreatorView";
+import HomeView from "../views/HomeView";
 import ManageUserRolesView from "../views/ManageUserRolesView";
+import NewTicketView from "../views/NewTicketView";
 import ProjectInfoView from "../views/ProjectInfoView";
 import ProjectsOverviewView from "../views/ProjectsOverviewView";
 import TicketView from "../views/TicketView";
 import UserStatsView from "../views/UserStatsView";
-import CreatorView from "../views/CreatorView";
-import NewTicketView from "../views/NewTicketView";
-
-import Helmet from "react-helmet";
-import HomeView from "../views/HomeView";
-import { Button } from "react-bootstrap";
 
 const userID = "----";
 const userName = "----";
@@ -90,7 +89,9 @@ export default () => (
                 <Button
                     variant="danger"
                     className="mx-2"
-                    onClick={() => (location.href = `${process.env.SERVER_URL}/logout`)}
+                    onClick={() =>
+                        (window.location.href = `${process.env.REACT_APP_SERVER_URL}/logout`)
+                    }
                 >
                     Logout
                 </Button>

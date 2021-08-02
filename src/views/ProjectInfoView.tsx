@@ -1,11 +1,9 @@
 import * as React from "react";
-import { Card, CardGroup, Container, Table, Spinner } from "react-bootstrap";
+import { Card, CardGroup, Container, Spinner, Table } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { Maybe, Project } from "../models";
-import { Ticket } from "../models";
-import { User } from "../models";
 import { useParams } from "react-router-dom";
 import projectInfoAccessor from "../controllers/ProjectInfoAccessor";
+import { Maybe, Project, Ticket, User } from "../models";
 
 const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undefined }> = ({
     associatedUsers,
@@ -19,14 +17,14 @@ const AssignedPersonel: React.FC<{ associatedUsers: Maybe<Maybe<User>[]> | undef
         </thead>
         <tbody>
             {associatedUsers
-                ? associatedUsers.map((user: User | null) => {
+                ? associatedUsers.map((user: User | null) =>
                       user ? (
                           <tr key={user.id}>
                               <td>{user.name}</td>
                               <td>{user.email}</td>
                           </tr>
-                      ) : undefined;
-                  })
+                      ) : undefined
+                  )
                 : undefined}
         </tbody>
     </Table>

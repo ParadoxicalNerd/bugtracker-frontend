@@ -1,10 +1,10 @@
-import * as React from "react";
-import { Card, CardGroup, Col, Container, Row, Spinner } from "react-bootstrap";
-import { Component, useRef, useEffect } from "react";
 import Chart from "chart.js/auto";
-import { Maybe, Ticket, TicketPriority, TicketStatus, TicketTypes } from "../models";
-import userStatsAccessor from "../controllers/UserStatsAccessor";
+import * as React from "react";
+import { useEffect, useRef } from "react";
+import { Card, CardGroup, Container, Spinner } from "react-bootstrap";
 import UserContext from "../context/UserContext";
+import userStatsAccessor from "../controllers/UserStatsAccessor";
+import { Maybe, Ticket, TicketStatus } from "../models";
 // Cannot use treeshaking for Chart. Gotta import everything. Read this:
 // https://www.chartjs.org/docs/latest/getting-started/integration.html#bundlers-webpack-rollup-etc
 
@@ -33,8 +33,6 @@ const TicketPriorityView = ({ tickets }: { tickets: Maybe<Maybe<Ticket>[]> | und
     };
 
     let canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-    TICKET_INFO[TicketPriority.Unknown];
 
     tickets?.forEach((val) => {
         if (val && val.status != TicketStatus.Resolved) TICKET_INFO[val.priority].value++;

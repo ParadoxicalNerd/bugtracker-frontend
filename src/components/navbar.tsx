@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Container, Navbar, Nav, NavDropdown, Button, Form, FormControl } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { Button, Nav, Navbar } from "react-bootstrap";
 
 // import {} from '../../dist/favicon.ico'
 
@@ -14,8 +13,7 @@ export default () => {
             variant="dark"
             expand="sm"
             collapseOnSelect
-            static="top"
-            style={{ alignItems: "center" }}
+            style={{ alignItems: "center", position: "fixed", top: 0 }}
         >
             <Navbar.Brand href="/home" className="px-5">
                 <img src="favicon.ico" width="30" height="30" />
@@ -45,7 +43,9 @@ export default () => {
                 <Button
                     variant="danger"
                     className="mx-2"
-                    onClick={() => (location.href = `${process.env.SERVER_URL}/logout`)}
+                    onClick={() =>
+                        (window.location.href = `${process.env.REACT_APP_SERVER_URL}/logout`)
+                    }
                 >
                     Logout
                 </Button>

@@ -1,8 +1,8 @@
 import * as React from "react";
-import Routes from "./router";
-import Navbar from "./components/navbar";
 import { Button, Card, Container, Modal } from "react-bootstrap";
+import Navbar from "./components/navbar";
 import ErrorHandler from "./ErrorHandler";
+import Routes from "./router";
 import isLoggedIn from "./utils/isLoggedIn";
 
 const App = () => {
@@ -29,7 +29,9 @@ const App = () => {
                 <Modal.Footer>
                     <Button
                         variant="primary"
-                        onClick={() => (location.href = `${process.env.SERVER_URL}/login`)}
+                        onClick={() =>
+                            (window.location.href = `${process.env.REACT_APP_SERVER_URL}/login`)
+                        }
                     >
                         Click to login
                     </Button>
