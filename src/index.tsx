@@ -14,7 +14,7 @@ const client = createClient({
     },
 });
 
-let mountNode = document.getElementById("app");
+let mountNode = document.getElementById("root");
 
 console.log(process.env.REACT_APP_SERVER_URL);
 

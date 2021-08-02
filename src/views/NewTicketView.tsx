@@ -1,17 +1,19 @@
-import { valueFromAST } from "graphql";
+import * as Joi from "joi";
 import * as React from "react";
-import { Card, Container, Form, Row, Col, Button, Spinner, Modal } from "react-bootstrap";
+import { Button, Card, Col, Container, Form, Modal, Row, Spinner } from "react-bootstrap";
+import { useHistory } from "react-router";
 import UserContext from "../context/UserContext";
 import newTicketMutator from "../controllers/NewTicketMutator";
 import projectNamesAccessor from "../controllers/ProjectNamesAccessor";
 import usernamesAccessor from "../controllers/UserNamesAccessor";
-import { Project } from "../models";
-import { Ticket, TicketPriority, TicketStatus, TicketTypes, TicketCreateInput } from "../models";
-import { User } from "../models";
-import ArrayEquals from "../utils/ArrayEquals";
-
-import * as Joi from "joi";
-import { useHistory } from "react-router";
+import {
+    Project,
+    TicketCreateInput,
+    TicketPriority,
+    TicketStatus,
+    TicketTypes,
+    User,
+} from "../models";
 
 let hydrator = {
     title: "",
@@ -150,6 +152,7 @@ const CreateNewTicket = ({
                                             as="select"
                                             value={formValue.project ? formValue.project : ""}
                                             onChange={onChange}
+                                            onchange
                                         >
                                             <option disabled hidden key="" value="">
                                                 Choose project

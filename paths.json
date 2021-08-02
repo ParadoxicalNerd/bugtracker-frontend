@@ -1,0 +1,22 @@
+{"compilerOptions": {
+    "sourceMap": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noImplicitAny": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": false,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "allowJs": true,
+    "jsx": "react",
+    "lib": [
+      "esnext",
+      "ES2019",
+      "dom",
+      "DOM.Iterable"
+    ]
+  },
+  "include": [
+    "./src/**/*"
+  ]}

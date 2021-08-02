@@ -13,7 +13,7 @@ export default () => {
             variant="dark"
             expand="sm"
             collapseOnSelect
-            style={{ alignItems: "center", position: "fixed", top: 0 }}
+            style={{ alignItems: "center", position: "fixed", top: 0, width: "100%" }}
         >
             <Navbar.Brand href="/home" className="px-5">
                 <img src="favicon.ico" width="30" height="30" />
