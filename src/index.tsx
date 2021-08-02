@@ -1,16 +1,11 @@
+import { devtoolsExchange } from "@urql/devtools";
+import "bootstrap/dist/css/bootstrap.min.css";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-
-import { createClient, Provider, defaultExchanges } from "urql";
-import { devtoolsExchange } from "@urql/devtools";
-
+import { HashRouter } from "react-router-dom";
+import { createClient, defaultExchanges, Provider } from "urql";
 import App from "./App";
 import "./styles.scss";
-
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, HashRouter } from "react-router-dom";
-
-import Navbar from "./components/navbar";
 
 const client = createClient({
     url: `${process.env.SERVER_URL}/graphql`,
@@ -21,6 +16,8 @@ const client = createClient({
 });
 
 let mountNode = document.getElementById("app");
+
+console.log(process.env.SERVER_URL);
 
 ReactDOM.render(
     <Provider value={client}>
