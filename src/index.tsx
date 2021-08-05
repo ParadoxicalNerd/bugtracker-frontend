@@ -7,7 +7,7 @@ import { createClient, defaultExchanges, Provider } from "urql";
 import App from "./App";
 
 const client = createClient({
-    url: `${process.env.REACT_APP_SERVER_URL}/graphql`,
+    url: `/graphql`,
     exchanges: [devtoolsExchange, ...defaultExchanges],
     fetchOptions: {
         credentials: "include",
@@ -15,8 +15,6 @@ const client = createClient({
 });
 
 let mountNode = document.getElementById("root");
-
-console.log(process.env.REACT_APP_SERVER_URL);
 
 ReactDOM.render(
     <Provider value={client}>

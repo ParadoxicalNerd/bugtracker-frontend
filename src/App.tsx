@@ -30,7 +30,7 @@ const App = () => {
                     <Button
                         variant="primary"
                         onClick={() =>
-                            (window.location.href = `${process.env.REACT_APP_SERVER_URL}/login`)
+                            (window.location.href = `/login`)
                         }
                     >
                         Click to login

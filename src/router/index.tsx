@@ -90,7 +90,7 @@ export default () => (
                     variant="danger"
                     className="mx-2"
                     onClick={() =>
-                        (window.location.href = `${process.env.REACT_APP_SERVER_URL}/logout`)
+                        (window.location.href = `/logout`)
                     }
                 >
                     Logout
